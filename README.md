@@ -2,6 +2,8 @@
 
 Nuxt 3, Tailwind CSS v4, shadcn-vue로 만든 Vue 컴포넌트 레지스트리입니다.
 
+라이브 사이트: <https://shadcn.71159176.xyz/>
+
 ## 시작하기
 
 ```bash
@@ -22,7 +24,7 @@ bun run build           # Nuxt 프로덕션 빌드
 배포 후 각 컴포넌트는 다음 형식으로 설치할 수 있습니다.
 
 ```bash
-bunx shadcn-vue@latest add "https://otel.71159176.xyz/r/interactive-hover-button.json"
+bunx shadcn-vue@latest add "https://shadcn.71159176.xyz/r/interactive-hover-button.json"
 ```
 
 `components.json`에 네임스페이스를 등록하면 짧은 이름도 사용할 수 있습니다.
@@ -30,7 +32,7 @@ bunx shadcn-vue@latest add "https://otel.71159176.xyz/r/interactive-hover-button
 ```json
 {
   "registries": {
-    "@71159176": "https://otel.71159176.xyz/r/{name}.json"
+    "@71159176": "https://shadcn.71159176.xyz/r/{name}.json"
   }
 }
 ```
