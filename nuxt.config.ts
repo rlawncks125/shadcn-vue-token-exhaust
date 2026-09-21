@@ -12,6 +12,27 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3015,
   },
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://shadcn.71159176.xyz',
+    },
+  },
+  routeRules: {
+    '/': {
+      prerender: true,
+      headers: {
+        'cache-control': 'public, max-age=0, must-revalidate',
+        'cloudflare-cdn-cache-control': 'public, s-maxage=86400, stale-while-revalidate=604800',
+      },
+    },
+    '/components/**': {
+      ssr: true,
+      headers: {
+        'cache-control': 'public, max-age=0, must-revalidate',
+        'cloudflare-cdn-cache-control': 'public, s-maxage=300, stale-while-revalidate=3600',
+      },
+    },
+  },
   modules: ['shadcn-nuxt', '@nuxt/content'],
   content: {
     experimental: { sqliteConnector: 'native' },
@@ -34,6 +55,7 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    compressPublicAssets: true,
     serverAssets: [
       {
         baseName: 'registry',

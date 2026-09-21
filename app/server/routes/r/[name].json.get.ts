@@ -25,7 +25,8 @@ export default defineEventHandler(async (event) => {
   const registryItem = typeof source === 'string' ? JSON.parse(source) : source
   const origin = getRequestURL(event, { xForwardedHost: true }).origin
   setResponseHeaders(event, {
-    'cache-control': 'private, no-store',
+    'cache-control': 'public, max-age=0, must-revalidate',
+    'cloudflare-cdn-cache-control': 'public, s-maxage=3600, stale-while-revalidate=86400',
     vary: 'Host, X-Forwarded-Host, X-Forwarded-Proto',
   })
   return applyRequestOrigin(registryItem, origin)

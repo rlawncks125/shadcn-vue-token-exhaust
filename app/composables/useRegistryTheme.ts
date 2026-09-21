@@ -12,19 +12,20 @@ export const registryThemes: Array<{
 ]
 
 export function useRegistryTheme() {
-  const theme = useCookie<RegistryTheme>('registry-theme', {
-    default: () => 'lime',
-    maxAge: 60 * 60 * 24 * 365,
-    sameSite: 'lax',
+  const theme = useState<RegistryTheme>('registry-theme', () => 'lime')
+
+  onMounted(() => {
+    const stored = localStorage.getItem('registry-theme')
+    if (registryThemes.some(option => option.id === stored)) theme.value = stored as RegistryTheme
+    watch(theme, (value) => {
+      localStorage.setItem('registry-theme', value)
+      document.documentElement.dataset.theme = value
+    }, { immediate: true })
   })
 
   function setTheme(value: RegistryTheme) {
     theme.value = value
   }
-
-  watch(theme, (value) => {
-    if (import.meta.client) document.documentElement.dataset.theme = value
-  }, { immediate: true })
 
   useHead(() => ({
     htmlAttrs: {
@@ -38,4 +39,4 @@ export function useRegistryTheme() {
     setTheme,
   }
 }
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'

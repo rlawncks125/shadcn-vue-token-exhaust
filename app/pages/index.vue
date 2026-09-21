@@ -4,7 +4,8 @@ import { categories, getInstallCommand, registryComponents } from '@/data/compon
 import { copyText } from '@/utils/clipboard'
 
 const copied = ref(false)
-const command = getInstallCommand('interactive-hover-button', useRequestURL({ xForwardedHost: true }).origin)
+const config = useRuntimeConfig()
+const command = getInstallCommand('interactive-hover-button', config.public.siteUrl)
 const latestComponents = registryComponents.slice(0, 4)
 
 async function copyCommand() {

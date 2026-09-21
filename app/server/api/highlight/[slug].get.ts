@@ -17,7 +17,10 @@ export default defineEventHandler(async (event) => {
   if (!code) throw createError({ statusCode: 404, statusMessage: 'Component example not found' })
 
   const highlighter = await highlighterPromise
-  setHeader(event, 'Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400')
+  setResponseHeaders(event, {
+    'cache-control': 'public, max-age=3600, stale-while-revalidate=86400',
+    'cloudflare-cdn-cache-control': 'public, s-maxage=86400, stale-while-revalidate=604800',
+  })
 
   return {
     html: highlighter.codeToHtml(code, {
