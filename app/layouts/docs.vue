@@ -5,6 +5,7 @@ import { categories, registryComponents } from '@/data/components'
 const route = useRoute()
 const mobileOpen = ref(false)
 const search = ref('')
+const pagePending = useState('page-pending', () => false)
 
 const { data: guidePages } = await useAsyncData('docs-navigation', () => queryCollection('docs')
   .select('title', 'path', 'description', 'order')
@@ -55,7 +56,10 @@ watch(() => route.fullPath, () => { mobileOpen.value = false })
       </div>
 
       <main class="min-w-0">
-        <slot />
+        <div v-show="!pagePending" :aria-hidden="pagePending || undefined">
+          <slot />
+        </div>
+        <PageContentLoadingSkeleton v-if="pagePending" />
       </main>
     </div>
   </div>
