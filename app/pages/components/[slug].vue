@@ -15,6 +15,7 @@ if (!item.value) {
 
 const category = computed(() => item.value ? getCategory(item.value.category) : undefined)
 const requestOrigin = useRequestURL({ xForwardedHost: true }).origin
+const publicSiteUrl = useRuntimeConfig().public.siteUrl.replace(/\/$/, '')
 const installCommand = computed(() => getInstallCommand(String(route.params.slug), requestOrigin))
 const componentExample = computed(() => getComponentExample(String(route.params.slug)))
 const exampleHighlightUrl = computed(() => `/api/highlight/${route.params.slug}`)
@@ -1030,7 +1031,31 @@ function resetControls() {
 useSeoMeta({
   title: () => `${item.value?.name ?? 'Component'} · 71159176 UI`,
   description: () => item.value?.description,
+  ogTitle: () => `${item.value?.name ?? 'Component'} · 71159176 UI`,
+  ogDescription: () => item.value?.description,
+  twitterTitle: () => `${item.value?.name ?? 'Component'} · 71159176 UI`,
+  twitterDescription: () => item.value?.description,
 })
+
+useHead(() => ({
+  script: item.value ? [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: item.value.name,
+      description: item.value.description,
+      dateModified: item.value.updated.replaceAll('.', '-'),
+      url: `${publicSiteUrl}/components/${item.value.slug}`,
+      programmingLanguage: ['Vue', 'TypeScript'],
+      isPartOf: {
+        '@type': 'WebSite',
+        name: '71159176 UI Registry',
+        url: publicSiteUrl,
+      },
+    }),
+  }] : [],
+}))
 </script>
 
 <template>

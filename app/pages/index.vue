@@ -22,6 +22,10 @@ async function copyCommand() {
 useSeoMeta({
   title: '71159176 UI Registry',
   description: '설치 가능한 shadcn-vue 컴포넌트를 탐색하고 디자인하는 Nuxt 레지스트리입니다.',
+  ogTitle: '71159176 UI Registry',
+  ogDescription: '설치 가능한 shadcn-vue 컴포넌트를 탐색하고 디자인하는 Nuxt 레지스트리입니다.',
+  twitterTitle: '71159176 UI Registry',
+  twitterDescription: '설치 가능한 shadcn-vue 컴포넌트를 탐색하고 디자인하는 Nuxt 레지스트리입니다.',
 })
 </script>
 

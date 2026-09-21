@@ -1,0 +1,13 @@
+{
+  "name": "71159176 UI Registry",
+  "short_name": "71159176 UI",
+  "description": "Installable Vue components built with Nuxt and shadcn-vue.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f1e8",
+  "theme_color": "#171814",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

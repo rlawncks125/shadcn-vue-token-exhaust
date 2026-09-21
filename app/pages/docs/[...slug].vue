@@ -11,6 +11,10 @@ definePageMeta({ layout: 'docs' })
 useSeoMeta({
   title: () => `${page.value?.title ?? 'Documentation'} · 71159176 UI`,
   description: () => page.value?.description,
+  ogTitle: () => `${page.value?.title ?? 'Documentation'} · 71159176 UI`,
+  ogDescription: () => page.value?.description,
+  twitterTitle: () => `${page.value?.title ?? 'Documentation'} · 71159176 UI`,
+  twitterDescription: () => page.value?.description,
 })
 </script>
 

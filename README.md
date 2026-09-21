@@ -34,6 +34,7 @@ URI Path equals /
 URI Path starts with /components/
 URI Path starts with /r/
 URI Path starts with /api/highlight/
+URI Path equals /sitemap.xml
 ```
 
 배포 직후 즉시 새 HTML이 필요하면 Cloudflare에서 `/`와 `/components/*`를 purge합니다. 해시가 붙는 `/_nuxt/` asset은 Nuxt 기본 immutable 캐시 정책을 그대로 사용합니다.

@@ -12,7 +12,14 @@ if (!category.value) {
 const items = computed(() => registryComponents.filter(component => component.category === category.value?.id))
 
 definePageMeta({ layout: 'docs' })
-useSeoMeta({ title: () => `${category.value?.name ?? 'Category'} · 71159176 UI` })
+useSeoMeta({
+  title: () => `${category.value?.name ?? 'Category'} · 71159176 UI`,
+  description: () => category.value?.description,
+  ogTitle: () => `${category.value?.name ?? 'Category'} · 71159176 UI`,
+  ogDescription: () => category.value?.description,
+  twitterTitle: () => `${category.value?.name ?? 'Category'} · 71159176 UI`,
+  twitterDescription: () => category.value?.description,
+})
 </script>
 
 <template>

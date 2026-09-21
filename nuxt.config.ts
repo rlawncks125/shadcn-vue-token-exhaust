@@ -75,6 +75,8 @@ export default defineNuxtConfig({
           name: 'description',
           content: 'Nuxt와 shadcn-vue로 만든 재사용 가능한 Vue 컴포넌트 레지스트리',
         },
+        { name: 'theme-color', content: '#171814' },
+        { name: 'application-name', content: '71159176 UI Registry' },
       ],
     },
   },

@@ -18,6 +18,10 @@ definePageMeta({ layout: 'docs' })
 useSeoMeta({
   title: 'Components · 71159176 UI',
   description: '설치 가능한 Vue 컴포넌트의 인터랙티브 문서와 API 레퍼런스입니다.',
+  ogTitle: 'Components · 71159176 UI',
+  ogDescription: '설치 가능한 Vue 컴포넌트의 인터랙티브 문서와 API 레퍼런스입니다.',
+  twitterTitle: 'Components · 71159176 UI',
+  twitterDescription: '설치 가능한 Vue 컴포넌트의 인터랙티브 문서와 API 레퍼런스입니다.',
 })
 </script>
 
