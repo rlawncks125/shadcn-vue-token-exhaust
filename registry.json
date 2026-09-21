@@ -1,0 +1,734 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry.json",
+  "name": "71159176-ui",
+  "homepage": "https://registry.invalid",
+  "items": [
+    {
+      "name": "registry-utils", "type": "registry:lib", "title": "Registry Utilities",
+      "description": "Shared class-name merge utilities for registry units.",
+      "dependencies": ["clsx@^2.1.1", "tailwind-merge@^3.7.0"],
+      "files": [{ "path": "registry/default/lib/utils.ts", "type": "registry:lib", "target": "~/app/lib/utils.ts" }]
+    },
+    {
+      "name": "ui-button", "type": "registry:ui", "title": "Button",
+      "description": "A variant-driven primitive button for composite registry components.",
+      "dependencies": ["class-variance-authority@^0.7.1", "reka-ui@^2.10.4"],
+      "registryDependencies": ["https://registry.invalid/r/registry-utils.json"],
+      "files": [
+        { "path": "registry/default/ui/button/Button.vue", "type": "registry:ui" },
+        { "path": "registry/default/ui/button/index.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "ui-input", "type": "registry:ui", "title": "Input",
+      "description": "A model-compatible native input unit for forms and wrappers.",
+      "registryDependencies": ["https://registry.invalid/r/registry-utils.json"],
+      "files": [
+        { "path": "registry/default/ui/input/Input.vue", "type": "registry:ui" },
+        { "path": "registry/default/ui/input/index.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "ui-label", "type": "registry:ui", "title": "Label",
+      "description": "A shared accessible label unit.",
+      "registryDependencies": ["https://registry.invalid/r/registry-utils.json"],
+      "files": [
+        { "path": "registry/default/ui/label/Label.vue", "type": "registry:ui" },
+        { "path": "registry/default/ui/label/index.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "animated-mobile-mini-player", "type": "registry:component", "title": "Animated Mobile Mini Player",
+      "description": "A controlled mobile mini player with playback controls, accessible seeking, safe-area placement, and compact track metadata.",
+      "categories": ["media", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-mini-player/AnimatedMobileMiniPlayer.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-selection-toolbar", "type": "registry:component", "title": "Animated Selection Toolbar",
+      "description": "A mobile bulk-action toolbar with selection count, safe-area placement, horizontal actions, and roving keyboard focus.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-selection-toolbar/AnimatedSelectionToolbar.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-mobile-composer", "type": "registry:component", "title": "Animated Mobile Composer",
+      "description": "A mobile message composer with auto-growing input, IME-safe keyboard submit, attachments, character feedback, and safe-area support.",
+      "categories": ["forms", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-composer/AnimatedMobileComposer.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-swipe-snackbar", "type": "registry:component", "title": "Animated Swipe Snackbar",
+      "description": "A mobile snackbar with swipe dismissal, pausable timeout, semantic tones, focus-safe actions, and safe-area placement.",
+      "categories": ["feedback", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-swipe-snackbar/AnimatedSwipeSnackbar.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-segmented-control", "type": "registry:component", "title": "Animated Segmented Control",
+      "description": "A mobile-ready segmented control with a measured sliding indicator, badges, disabled options, and roving keyboard selection.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-segmented-control/AnimatedSegmentedControl.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-action-sheet", "type": "registry:component", "title": "Animated Action Sheet",
+      "description": "A mobile-first action sheet with thumb-friendly actions, destructive states, focus trapping, scroll locking, and safe-area support.",
+      "categories": ["overlays", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-action-sheet/AnimatedActionSheet.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-navigation-menu", "type": "registry:component", "title": "Animated Navigation Menu",
+      "description": "A responsive controlled navigation menu with animated destination panels, pointer intent, outside dismissal, and complete keyboard traversal.",
+      "categories": ["navigation", "animation", "interactive", "mobile"],
+      "files": [{ "path": "registry/default/animated-navigation-menu/AnimatedNavigationMenu.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-alert-banner", "type": "registry:component", "title": "Animated Alert Banner",
+      "description": "An accessible responsive alert banner with semantic tones, expandable details, focus-safe dismissal, and controlled visibility.",
+      "categories": ["feedback", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-alert-banner/AnimatedAlertBanner.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-lightbox-gallery", "type": "registry:component", "title": "Animated Lightbox Gallery",
+      "description": "A mobile-ready image gallery with swipe navigation, zoom controls, focus trapping, safe-area support, and accessible dialog behavior.",
+      "categories": ["overlays", "media", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-lightbox-gallery/AnimatedLightboxGallery.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-mobile-header", "type": "registry:component", "title": "Animated Mobile Header",
+      "description": "A direction-aware mobile app header that hides or compacts while scrolling, restores on upward intent, and tracks reading progress.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-header/AnimatedMobileHeader.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-bottom-sheet", "type": "registry:component", "title": "Animated Bottom Sheet",
+      "description": "An accessible mobile bottom sheet with multi-snap drag, velocity-aware settling, backdrop dimming, and keyboard snap control.",
+      "categories": ["overlays", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-bottom-sheet/AnimatedBottomSheet.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-fab-menu", "type": "registry:component", "title": "Animated Fab Menu",
+      "description": "An accessible floating action button that expands into a staggered speed dial with menu semantics and roving keyboard focus.",
+      "categories": ["buttons", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-fab-menu/AnimatedFabMenu.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-editable-table", "type": "registry:component", "title": "Animated Editable Table",
+      "description": "An accessible controlled table with inline cell editing, grid keyboard navigation, row removal, and animated updates.",
+      "categories": ["data-display", "tables", "forms", "interactive"],
+      "files": [{ "path": "registry/default/animated-editable-table/AnimatedEditableTable.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-multi-select", "type": "registry:component", "title": "Animated Multi Select",
+      "description": "An accessible controlled multi-select with searchable options, removable chips, limits, and keyboard navigation.",
+      "categories": ["forms", "selection", "interactive"],
+      "files": [{ "path": "registry/default/animated-multi-select/AnimatedMultiSelect.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-time-picker", "type": "registry:component", "title": "Animated Time Picker",
+      "description": "An accessible controlled time picker with animated reels, selectable bounds, stepped values, and keyboard entry.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-time-picker/AnimatedTimePicker.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-kanban-board", "type": "registry:component", "title": "Animated Kanban Board",
+      "description": "An accessible controlled kanban board with pointer dragging, keyboard reordering, animated movement, and live announcements.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-kanban-board/AnimatedKanbanBoard.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-combobox", "type": "registry:component", "title": "Animated Combobox",
+      "description": "An accessible controlled combobox with grouped filtering, custom values, keyboard navigation, and an animated active option.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-combobox/AnimatedCombobox.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-tree-view", "type": "registry:component", "title": "Animated Tree View",
+      "description": "An accessible controlled tree with animated branches, typeahead, and complete keyboard navigation.",
+      "categories": ["data-display", "navigation", "animation"],
+      "files": [{ "path": "registry/default/animated-tree-view/AnimatedTreeView.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-date-picker", "type": "registry:component", "title": "Animated Date Picker",
+      "description": "An accessible controlled calendar with animated month navigation, date constraints, and roving keyboard focus.",
+      "categories": ["forms", "calendar", "animation"],
+      "files": [{ "path": "registry/default/animated-date-picker/AnimatedDatePicker.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-resizable-panels", "type": "registry:component", "title": "Animated Resizable Panels",
+      "description": "A controlled split-panel layout with pointer and keyboard resizing, snapping, and optional collapse.",
+      "categories": ["data-display", "layout", "interactive"],
+      "files": [{ "path": "registry/default/animated-resizable-panels/AnimatedResizablePanels.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-transfer-list", "type": "registry:component", "title": "Animated Transfer List",
+      "description": "An accessible dual listbox for moving ordered selections with multi-select keyboard controls and animated reflow.",
+      "categories": ["data-display", "forms", "animation"],
+      "files": [{ "path": "registry/default/animated-transfer-list/AnimatedTransferList.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-color-picker", "type": "registry:component", "title": "Animated Color Picker",
+      "description": "A controlled HSV and hex color editor with optional alpha, validated text input, and animated feedback.",
+      "categories": ["forms", "color", "interactive"],
+      "files": [{ "path": "registry/default/animated-color-picker/AnimatedColorPicker.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-image-cropper", "type": "registry:component", "title": "Animated Image Cropper",
+      "description": "A controlled image crop surface with pointer and keyboard geometry editing, zoom, rotation, and aspect constraints.",
+      "categories": ["forms", "media", "interactive"],
+      "files": [{ "path": "registry/default/animated-image-cropper/AnimatedImageCropper.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-checkbox-group", "type": "registry:component", "title": "Animated Checkbox Group",
+      "description": "An accessible controlled checkbox card group with selection limits, responsive layouts, and animated summaries.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-checkbox-group/AnimatedCheckboxGroup.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-progress-bar", "type": "registry:component", "title": "Animated Progress Bar",
+      "description": "An accessible progress indicator with determinate and indeterminate states, replayable motion, and status-aware styling.",
+      "categories": ["feedback", "animation", "data-display"],
+      "files": [{ "path": "registry/default/animated-progress-bar/AnimatedProgressBar.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-bottom-navigation", "type": "registry:component", "title": "Animated Bottom Navigation",
+      "description": "A controlled bottom navigation bar with a measured active indicator, badges, safe-area support, and roving keyboard focus.",
+      "categories": ["navigation", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-bottom-navigation/AnimatedBottomNavigation.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-bar-chart", "type": "registry:component", "title": "Animated Bar Chart",
+      "description": "An accessible selectable bar chart with keyboard navigation, replayable growth, and a semantic data table.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-bar-chart/AnimatedBarChart.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "auto-resize-textarea", "type": "registry:component", "title": "Auto Resize Textarea",
+      "description": "A controlled native textarea with animated auto-sizing, row limits, character feedback, and validation semantics.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/auto-resize-textarea/AutoResizeTextarea.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "flip-card", "type": "registry:component", "title": "Flip Card",
+      "description": "An accessible controlled two-sided card with axis-aware 3D motion and a reduced-motion face swap.",
+      "categories": ["cards", "animation", "interactive"],
+      "files": [{ "path": "registry/default/flip-card/FlipCard.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-avatar-group", "type": "registry:component", "title": "Animated Avatar Group",
+      "description": "A selectable avatar stack with animated expansion, image fallbacks, presence states, and accessible controls.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-avatar-group/AnimatedAvatarGroup.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "expandable-search", "type": "registry:component", "title": "Expandable Search",
+      "description": "A compact controlled search field with animated expansion, focus restoration, clearing, and a keyboard shortcut.",
+      "categories": ["forms", "navigation", "animation"],
+      "files": [{ "path": "registry/default/expandable-search/ExpandableSearch.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-notification-badge", "type": "registry:component", "title": "Animated Notification Badge",
+      "description": "An accessible notification trigger with bounded counts, live announcements, and replayable attention motion.",
+      "categories": ["feedback", "buttons", "animation"],
+      "files": [{ "path": "registry/default/animated-notification-badge/AnimatedNotificationBadge.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-tag-input", "type": "registry:component", "title": "Animated Tag Input",
+      "description": "An accessible controlled tag editor with paste splitting, keyboard chip navigation, and animated updates.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-tag-input/AnimatedTagInput.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "ripple-button", "type": "registry:component", "title": "Ripple Button",
+      "description": "A native button with bounded pointer-origin ripples, keyboard feedback, and reduced-motion support.",
+      "categories": ["buttons", "animation", "interactive"],
+      "files": [{ "path": "registry/default/ripple-button/RippleButton.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-radio-group", "type": "registry:component", "title": "Animated Radio Group",
+      "description": "An accessible native radio card group with animated selection, responsive layouts, and keyboard navigation.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-radio-group/AnimatedRadioGroup.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "scratch-card", "type": "registry:component", "title": "Scratch Card",
+      "description": "An accessible canvas scratch surface with progress detection, controlled reveal state, and keyboard fallback.",
+      "categories": ["cards", "canvas", "interactive"],
+      "files": [{ "path": "registry/default/scratch-card/ScratchCard.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-text-highlight", "type": "registry:component", "title": "Animated Text Highlight",
+      "description": "A selectable marker-style text highlight with load, hover, click, view, and programmatic triggers.",
+      "categories": ["text-effects", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-text-highlight/AnimatedTextHighlight.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "meteor-shower", "type": "registry:component", "title": "Meteor Shower",
+      "description": "A deterministic animated meteor field with configurable trajectories, playback controls, and static reduced motion.",
+      "categories": ["backgrounds", "animation"],
+      "files": [{ "path": "registry/default/meteor-shower/MeteorShower.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-pagination", "type": "registry:component", "title": "Animated Pagination",
+      "description": "An accessible compact pagination control with roving focus, animated state, and a progress rail.",
+      "categories": ["navigation", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-pagination/AnimatedPagination.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "range-slider", "type": "registry:component", "title": "Range Slider",
+      "description": "An accessible dual native range control with constrained values, animated fill, and value bubbles.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/range-slider/RangeSlider.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "copy-button", "type": "registry:component", "title": "Copy Button",
+      "description": "A resilient clipboard action with fallback copying, animated state feedback, and rapid-click guards.",
+      "categories": ["buttons", "feedback", "animation"],
+      "files": [{ "path": "registry/default/copy-button/CopyButton.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-donut-chart", "type": "registry:component", "title": "Animated Donut Chart",
+      "description": "An accessible SVG donut chart with animated segments, controlled selection, and semantic data.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-donut-chart/AnimatedDonutChart.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-stepper", "type": "registry:component", "title": "Animated Stepper",
+      "description": "An accessible progress stepper with animated connectors, controlled state, and roving keyboard focus.",
+      "categories": ["navigation", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-stepper/AnimatedStepper.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "floating-label-input", "type": "registry:component", "title": "Floating Label Input",
+      "description": "A native controlled input with an animated floating label, validation feedback, and clear action.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/floating-label-input/FloatingLabelInput.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-radar-chart", "type": "registry:component", "title": "Animated Radar Chart",
+      "description": "An accessible SVG radar chart with animated series, controlled selection, and a semantic data summary.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-radar-chart/AnimatedRadarChart.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "cursor-trail", "type": "registry:component", "title": "Cursor Trail",
+      "description": "A local pointer trail surface with bounded particles, playback controls, and reduced-motion support.",
+      "categories": ["backgrounds", "animation", "interactive"],
+      "files": [{ "path": "registry/default/cursor-trail/CursorTrail.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "liquid-toggle", "type": "registry:component", "title": "Liquid Toggle",
+      "description": "An accessible switch with an elastic liquid fill, controlled state, and reduced-motion support.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/liquid-toggle/LiquidToggle.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "direction-aware-card", "type": "registry:component", "title": "Direction Aware Card",
+      "description": "A keyboard-accessible card whose animated overlay follows the pointer entry and exit edge.",
+      "categories": ["cards", "animation", "interactive"],
+      "files": [{ "path": "registry/default/direction-aware-card/DirectionAwareCard.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "connection-beam", "type": "registry:component", "title": "Connection Beam",
+      "description": "An interactive SVG node map with animated signal paths and roving keyboard focus.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/connection-beam/ConnectionBeam.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "split-text-reveal", "type": "registry:component", "title": "Split Text Reveal",
+      "description": "A grapheme-aware masked text reveal with replay triggers and reduced-motion support.",
+      "categories": ["text-effects", "animation"],
+      "files": [{ "path": "registry/default/split-text-reveal/SplitTextReveal.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-filter-grid", "type": "registry:component", "title": "Animated Filter Grid",
+      "description": "A filterable, sortable grid with FLIP movement, staggered transitions, and keyboard selection.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-filter-grid/AnimatedFilterGrid.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "swipe-drawer", "type": "registry:component", "title": "Swipe Drawer",
+      "description": "An accessible edge drawer with drag dismissal, focus management, and reduced-motion support.",
+      "categories": ["overlays", "animation", "interactive"],
+      "files": [{ "path": "registry/default/swipe-drawer/SwipeDrawer.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-rating", "type": "registry:component", "title": "Animated Rating",
+      "description": "An accessible rating control with hover previews, keyboard navigation, and spring-like feedback.",
+      "categories": ["feedback", "forms", "animation"],
+      "files": [{ "path": "registry/default/animated-rating/AnimatedRating.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "interactive-dot-field", "type": "registry:component", "title": "Interactive Dot Field",
+      "description": "A responsive SVG dot field with pointer proximity and radial signal pulses.",
+      "categories": ["backgrounds", "animation", "interactive"],
+      "files": [{ "path": "registry/default/interactive-dot-field/InteractiveDotField.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-breadcrumb", "type": "registry:component", "title": "Animated Breadcrumb",
+      "description": "A responsive breadcrumb with animated path changes and an accessible collapsed-items menu.",
+      "categories": ["navigation", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-breadcrumb/AnimatedBreadcrumb.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "pull-to-refresh", "type": "registry:component", "title": "Pull to Refresh",
+      "description": "A touch-friendly refresh viewport with elastic pulling, async state, and an accessible fallback action.",
+      "categories": ["feedback", "gesture", "animation"],
+      "files": [{ "path": "registry/default/pull-to-refresh/PullToRefresh.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-calendar-heatmap", "type": "registry:component", "title": "Animated Calendar Heatmap",
+      "description": "An accessible calendar activity grid with animated values, selection, and keyboard exploration.",
+      "categories": ["data-display", "calendar", "animation"],
+      "files": [{ "path": "registry/default/animated-calendar-heatmap/AnimatedCalendarHeatmap.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "scroll-progress-nav", "type": "registry:component", "title": "Scroll Progress Nav",
+      "description": "A container-scoped reading navigator with active-section tracking and animated progress.",
+      "categories": ["navigation", "scroll", "animation"],
+      "files": [{ "path": "registry/default/scroll-progress-nav/ScrollProgressNav.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "guided-tour", "type": "registry:component", "title": "Guided Tour",
+      "description": "A focus-managed product tour with an animated spotlight and collision-aware step panel.",
+      "categories": ["overlays", "onboarding", "animation"],
+      "files": [{ "path": "registry/default/guided-tour/GuidedTour.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "validated-form", "type": "registry:component", "title": "Validated Form",
+      "description": "A vee-validate field wrapper composed from reusable Label, Input, and Button units.",
+      "dependencies": ["vee-validate@^4.15.1", "@vee-validate/zod@^4.15.1", "zod@^4.6.5"],
+      "registryDependencies": ["https://registry.invalid/r/ui-button.json", "https://registry.invalid/r/ui-input.json", "https://registry.invalid/r/ui-label.json"],
+      "categories": ["forms", "wrapper", "composition"],
+      "files": [
+        { "path": "registry/default/validated-form-field/FormField.vue", "type": "registry:component" },
+        { "path": "registry/default/validated-form-field/index.ts", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "data-table", "type": "registry:component", "title": "Data Table",
+      "description": "A TanStack Vue Table wrapper with sorting, filtering, pagination, and FlexRender cells.",
+      "dependencies": ["@tanstack/vue-table@^8.21.3"],
+      "registryDependencies": ["https://registry.invalid/r/ui-button.json", "https://registry.invalid/r/ui-input.json"],
+      "categories": ["data-display", "table", "wrapper"],
+      "files": [
+        { "path": "registry/default/data-table/DataTable.vue", "type": "registry:component" },
+        { "path": "registry/default/data-table/index.ts", "type": "registry:component" }
+      ]
+    },
+    {
+      "name": "mask-reveal", "type": "registry:component", "title": "Mask Reveal",
+      "description": "A directional clip-path reveal for viewport-driven media and content.",
+      "categories": ["animation", "media", "layout"],
+      "files": [{ "path": "registry/default/mask-reveal/MaskReveal.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "flip-countdown", "type": "registry:component", "title": "Flip Countdown",
+      "description": "A precise countdown timer with per-digit flip transitions and playback controls.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/flip-countdown/FlipCountdown.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "typewriter-text", "type": "registry:component", "title": "Typewriter Text",
+      "description": "Grapheme-aware typing and deleting text with looping and playback controls.",
+      "categories": ["text-effects", "animation"],
+      "files": [{ "path": "registry/default/typewriter-text/TypewriterText.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-sparkline", "type": "registry:component", "title": "Animated Sparkline",
+      "description": "An accessible SVG sparkline with draw, area, point, and data-update animations.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-sparkline/AnimatedSparkline.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "gradient-text", "type": "registry:component", "title": "Gradient Text",
+      "description": "Animated gradient typography with directional flow and playback controls.",
+      "categories": ["text-effects", "animation"],
+      "files": [{ "path": "registry/default/gradient-text/GradientText.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "waveform-player", "type": "registry:component", "title": "Waveform Player",
+      "description": "An animated waveform transport with playback, seeking, looping, and reduced-motion support.",
+      "categories": ["media", "animation", "interactive"],
+      "files": [{ "path": "registry/default/waveform-player/WaveformPlayer.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "elastic-slider", "type": "registry:component", "title": "Elastic Slider",
+      "description": "A native range input with an elastic thumb and tracked value bubble.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/elastic-slider/ElasticSlider.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "floating-tooltip", "type": "registry:component", "title": "Floating Tooltip",
+      "description": "A collision-aware animated tooltip for pointer and keyboard users.",
+      "categories": ["overlays", "animation", "interactive"],
+      "files": [{ "path": "registry/default/floating-tooltip/FloatingTooltip.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "spring-checkbox", "type": "registry:component", "title": "Spring Checkbox",
+      "description": "A native checkbox with spring feedback and animated checked and mixed states.",
+      "categories": ["forms", "animation", "interactive"],
+      "files": [{ "path": "registry/default/spring-checkbox/SpringCheckbox.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "morphing-dialog", "type": "registry:component", "title": "Morphing Dialog",
+      "description": "An accessible modal that expands from and collapses back into its trigger.",
+      "categories": ["overlays", "animation", "interactive"],
+      "files": [{ "path": "registry/default/morphing-dialog/MorphingDialog.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "burst-button", "type": "registry:component", "title": "Burst Button",
+      "description": "An accessible action button with configurable radial particle feedback.",
+      "categories": ["buttons", "animation", "interactive"],
+      "files": [{ "path": "registry/default/burst-button/BurstButton.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-timeline", "type": "registry:component", "title": "Animated Timeline",
+      "description": "An interactive progress timeline with animated stages, autoplay and keyboard navigation.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-timeline/AnimatedTimeline.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "shimmer-skeleton", "type": "registry:component", "title": "Shimmer Skeleton",
+      "description": "A slot-based loading surface with controlled shimmer and content reveal motion.",
+      "categories": ["feedback", "animation", "loading"],
+      "files": [{ "path": "registry/default/shimmer-skeleton/ShimmerSkeleton.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "radial-progress", "type": "registry:component", "title": "Radial Progress",
+      "description": "An animated SVG progress ring with synchronized value tweening and an indeterminate mode.",
+      "categories": ["feedback", "animation", "progress"],
+      "files": [{ "path": "registry/default/radial-progress/RadialProgress.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "text-loop", "type": "registry:component", "title": "Text Loop",
+      "description": "A grapheme-staggered word rotator with width interpolation and complete playback controls.",
+      "categories": ["text-effects", "animation", "data-display"],
+      "files": [{ "path": "registry/default/text-loop/TextLoop.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "border-beam", "type": "registry:component", "title": "Border Beam",
+      "description": "A slot-based surface with phased SVG border beams and complete motion controls.",
+      "categories": ["cards", "animation", "effects"],
+      "files": [{ "path": "registry/default/border-beam/BorderBeam.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-disclosure", "type": "registry:component", "title": "Animated Disclosure",
+      "description": "An accessible disclosure with measured height animation, lazy mounting and reduced-motion support.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-disclosure/AnimatedDisclosure.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "scroll-reveal", "type": "registry:component", "title": "Scroll Reveal",
+      "description": "A viewport-aware reveal wrapper with composable motion variants, replay and reduced-motion support.",
+      "categories": ["data-display", "animation", "utility"],
+      "files": [{ "path": "registry/default/scroll-reveal/ScrollReveal.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "stacked-carousel", "type": "registry:component", "title": "Stacked Carousel",
+      "description": "An animated card stack with autoplay progress, keyboard navigation and reduced-motion support.",
+      "categories": ["cards", "animation", "interactive"],
+      "files": [{ "path": "registry/default/stacked-carousel/StackedCarousel.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "orbiting-actions", "type": "registry:component", "title": "Orbiting Actions",
+      "description": "Interactive actions that orbit a central slot with pause controls and reduced-motion support.",
+      "categories": ["data-display", "animation", "interactive"],
+      "files": [{ "path": "registry/default/orbiting-actions/OrbitingActions.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "context-menu", "type": "registry:component", "title": "Context Menu",
+      "description": "An accessible context menu opened by right-click, keyboard or touch long press.",
+      "categories": ["navigation", "menu", "interactive"],
+      "files": [{ "path": "registry/default/context-menu/ContextMenu.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "reaction-picker", "type": "registry:component", "title": "Reaction Picker",
+      "description": "An accessible reaction grid with controlled selection, keyboard navigation and responsive positioning.",
+      "categories": ["feedback", "popover", "interactive"],
+      "files": [{ "path": "registry/default/reaction-picker/ReactionPicker.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "number-stepper", "type": "registry:component", "title": "Number Stepper",
+      "description": "An accessible numeric control with direct input, keyboard actions and press-and-hold repetition.",
+      "categories": ["feedback", "form", "interactive"],
+      "files": [{ "path": "registry/default/number-stepper/NumberStepper.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "reorder-list", "type": "registry:component", "title": "Reorder List",
+      "description": "An accessible sortable list with pointer, touch and keyboard reordering.",
+      "categories": ["data-display", "list", "interactive"],
+      "files": [{ "path": "registry/default/reorder-list/ReorderList.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "action-menu", "type": "registry:component", "title": "Action Menu",
+      "description": "An accessible contextual action menu with keyboard navigation and focus restoration.",
+      "categories": ["navigation", "menu", "interactive"],
+      "files": [{ "path": "registry/default/action-menu/ActionMenu.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "inline-edit", "type": "registry:component", "title": "Inline Edit",
+      "description": "An accessible display-to-input editor with validation, save, cancel and focus restoration.",
+      "categories": ["feedback", "form", "interactive"],
+      "files": [{ "path": "registry/default/inline-edit/InlineEdit.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "hold-to-confirm", "type": "registry:component", "title": "Hold to Confirm",
+      "description": "A deliberate action button completed by holding pointer, touch, Space or Enter.",
+      "categories": ["buttons", "interactive"],
+      "files": [{ "path": "registry/default/hold-to-confirm/HoldToConfirm.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "swipe-actions", "type": "registry:component", "title": "Swipe Actions",
+      "description": "A pointer, touch and keyboard accessible action tray revealed by horizontal swiping.",
+      "categories": ["cards", "interactive"],
+      "files": [{ "path": "registry/default/swipe-actions/SwipeActions.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "password-strength", "type": "registry:component", "title": "Password Strength",
+      "description": "A password field with visibility control, configurable requirements and an accessible strength meter.",
+      "categories": ["feedback", "form"],
+      "files": [{ "path": "registry/default/password-strength/PasswordStrength.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "otp-input", "type": "registry:component", "title": "OTP Input",
+      "description": "An accessible one-time-code input with paste distribution and complete keyboard navigation.",
+      "categories": ["feedback", "form"],
+      "files": [{ "path": "registry/default/otp-input/OtpInput.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "file-dropzone", "type": "registry:component", "title": "File Dropzone",
+      "description": "An accessible file picker with drag and drop, validation, rejection details and removable files.",
+      "categories": ["feedback", "form"],
+      "files": [{ "path": "registry/default/file-dropzone/FileDropzone.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "infinite-marquee", "type": "registry:component", "title": "Infinite Marquee",
+      "description": "A seamless slot-based marquee with direction, speed, pause and reduced-motion controls.",
+      "categories": ["data-display", "animation"],
+      "files": [{ "path": "registry/default/infinite-marquee/InfiniteMarquee.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "command-menu", "type": "registry:component", "title": "Command Menu",
+      "description": "A searchable command palette with global shortcut, keyboard navigation and focus management.",
+      "categories": ["navigation", "overlay"],
+      "files": [{ "path": "registry/default/command-menu/CommandMenu.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "loading-morph", "type": "registry:component", "title": "Loading Morph",
+      "description": "A controlled async action button that morphs through loading, success and error states.",
+      "categories": ["feedback", "button"],
+      "files": [{ "path": "registry/default/loading-morph/LoadingMorph.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "toast-stack", "type": "registry:component", "title": "Toast Stack",
+      "description": "Controlled notifications with tones, actions, auto-dismiss and accessible live roles.",
+      "categories": ["feedback", "notification"],
+      "files": [{ "path": "registry/default/toast-stack/ToastStack.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "comparison-slider", "type": "registry:component", "title": "Comparison Slider",
+      "description": "An accessible before-and-after slider with slots and controlled position.",
+      "categories": ["data-display", "interactive"],
+      "files": [{ "path": "registry/default/comparison-slider/ComparisonSlider.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-list", "type": "registry:component", "title": "Animated List",
+      "description": "A progressive list with item slots, selection events and accessible live updates.",
+      "categories": ["data-display", "animation"],
+      "files": [{ "path": "registry/default/animated-list/AnimatedList.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "number-ticker", "type": "registry:component", "title": "Number Ticker",
+      "description": "An accessible viewport-triggered number animation with deterministic formatting.",
+      "categories": ["text-effects", "data-display"],
+      "files": [{ "path": "registry/default/number-ticker/NumberTicker.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "aurora-background", "type": "registry:component", "title": "Aurora Background",
+      "description": "A CSS aurora surface with color, speed, intensity and motion controls.",
+      "categories": ["backgrounds", "animation"],
+      "files": [{ "path": "registry/default/aurora-background/AuroraBackground.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "floating-dock", "type": "registry:component", "title": "Floating Dock",
+      "description": "An accessible action dock with magnification, icon slots and controlled selection.",
+      "categories": ["navigation", "interactive"],
+      "files": [{ "path": "registry/default/floating-dock/FloatingDock.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:component",
+      "title": "Tilt Card",
+      "description": "A composable 3D tilt surface with optional pointer glare and reduced-motion support.",
+      "categories": ["cards", "interactive"],
+      "files": [{ "path": "registry/default/tilt-card/TiltCard.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "animated-tabs",
+      "type": "registry:component",
+      "title": "Animated Tabs",
+      "description": "Accessible tabs with an animated selection indicator and named content slots.",
+      "dependencies": ["reka-ui@^2.10.4"],
+      "categories": ["navigation", "interactive"],
+      "files": [{ "path": "registry/default/animated-tabs/AnimatedTabs.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:component",
+      "title": "Magnetic Button",
+      "description": "A pointer-following button with smooth return motion and reduced-motion support.",
+      "categories": ["buttons", "interactive"],
+      "files": [{ "path": "registry/default/magnetic-button/MagneticButton.vue", "type": "registry:component" }]
+    },
+    {
+      "name": "interactive-hover-button",
+      "type": "registry:component",
+      "title": "Interactive Hover Button",
+      "description": "A pill button with a rising color fill and directional icon motion.",
+      "categories": ["buttons", "interactive"],
+      "files": [
+        {
+          "path": "registry/default/interactive-hover-button/InteractiveHoverButton.vue",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:component",
+      "title": "Spotlight Card",
+      "description": "A dark content card with a pointer-following radial spotlight.",
+      "categories": ["cards", "interactive"],
+      "files": [
+        {
+          "path": "registry/default/spotlight-card/SpotlightCard.vue",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "status-pulse",
+      "type": "registry:component",
+      "title": "Status Pulse",
+      "description": "A compact live status indicator with three semantic color options.",
+      "categories": ["feedback", "status"],
+      "files": [
+        {
+          "path": "registry/default/status-pulse/StatusPulse.vue",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "text-scramble",
+      "type": "registry:component",
+      "title": "Text Scramble",
+      "description": "An accessible text decoder effect with hover, click, and load triggers.",
+      "categories": ["text-effects", "animation"],
+      "files": [
+        {
+          "path": "registry/default/text-scramble/TextScramble.vue",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
