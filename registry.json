@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-compass", "type": "registry:component", "title": "Animated Mobile Compass",
+      "description": "A sensor-ready mobile compass with controlled heading, target bearing, shortest-turn guidance, distance, accuracy, and calibration actions.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-compass/AnimatedMobileCompass.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-connectivity-bar", "type": "registry:component", "title": "Animated Mobile Connectivity Bar",
       "description": "A safe-area-aware mobile network status bar with offline retry, reconnecting feedback, automatic online dismissal, and accessible announcements.",
       "categories": ["feedback", "mobile", "animation", "interactive"],

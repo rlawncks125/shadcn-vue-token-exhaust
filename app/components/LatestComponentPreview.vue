@@ -44,6 +44,7 @@ const AnimatedSlideToConfirm = defineAsyncComponent(() => import('#registry/defa
 const AnimatedMobileActionBar = defineAsyncComponent(() => import('#registry/default/animated-mobile-action-bar/AnimatedMobileActionBar.vue'))
 const AnimatedMobileVoiceRecorder = defineAsyncComponent(() => import('#registry/default/animated-mobile-voice-recorder/AnimatedMobileVoiceRecorder.vue'))
 const AnimatedMobileConnectivityBar = defineAsyncComponent(() => import('#registry/default/animated-mobile-connectivity-bar/AnimatedMobileConnectivityBar.vue'))
+const AnimatedMobileCompass = defineAsyncComponent(() => import('#registry/default/animated-mobile-compass/AnimatedMobileCompass.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -138,7 +139,8 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-connectivity-bar'" class="mx-auto min-h-[300px] w-full max-w-[460px] rounded-[22px] bg-[#dad4c7] p-4">
+    <div v-if="slug === 'animated-mobile-compass'" class="mx-auto w-full max-w-[340px] rounded-[22px] bg-[#b7c6bb] p-3"><AnimatedMobileCompass :heading="32" :target-bearing="118" target-label="North marker" distance="240 m" :accuracy="6" :duration="180" /></div>
+    <div v-else-if="slug === 'animated-mobile-connectivity-bar'" class="mx-auto min-h-[300px] w-full max-w-[460px] rounded-[22px] bg-[#dad4c7] p-4">
       <AnimatedMobileConnectivityBar v-model:open="connectivityOpen" state="offline" :fixed="false" :safe-area="false" :duration="180" />
       <div class="mt-8 rounded-[18px] bg-white/50 p-4"><p class="text-[9px] font-bold uppercase tracking-[.18em] text-black/35">Offline notes</p><p class="mt-3 text-2xl font-semibold tracking-[-.05em]">North trail index.</p></div>
     </div>

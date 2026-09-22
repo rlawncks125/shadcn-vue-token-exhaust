@@ -50,6 +50,17 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-compass', name: 'Animated Mobile Compass', category: 'navigation', status: 'Ready', updated: '2026.09.22',
+    description: 'A sensor-ready mobile compass with controlled heading, target bearing, shortest-turn guidance, distance, accuracy, and calibration actions.', tags: ['compass', 'location', 'mobile'],
+    props: [
+      { name: 'heading / targetBearing', type: 'number', default: '0 / 0', description: 'Current device heading and destination bearing in degrees.' },
+      { name: 'targetLabel / distance / accuracy', type: 'string / string / number', default: 'Destination / - / 0', description: 'Destination context and sensor quality.' },
+      { name: 'arrivalThreshold / duration', type: 'number', default: '8 / 420', description: 'Straight-ahead tolerance and dial transition timing.' },
+      { name: 'active / disabled', type: 'boolean', default: 'true / false', description: 'Live target emphasis and interaction state.' },
+      { name: 'calibrate / select', type: 'events', default: '-', description: 'Requests sensor calibration or destination selection.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-connectivity-bar', name: 'Animated Mobile Connectivity Bar', category: 'feedback', status: 'Ready', updated: '2026.09.22',
     description: 'A safe-area-aware mobile network status bar with offline retry, reconnecting feedback, automatic online dismissal, and accessible announcements.', tags: ['connectivity', 'offline', 'mobile'],
     props: [

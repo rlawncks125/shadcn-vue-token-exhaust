@@ -1,4 +1,19 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-compass': `<script setup lang="ts">
+const heading = ref(0)
+const targetBearing = ref(118)
+</script>
+
+<template>
+  <AnimatedMobileCompass
+    :heading="heading"
+    :target-bearing="targetBearing"
+    target-label="North marker"
+    distance="240 m"
+    :accuracy="6"
+    @calibrate="requestCompassPermission()"
+  />
+</template>`,
   'animated-mobile-connectivity-bar': `<script setup lang="ts">
 const visible = ref(true)
 const network = ref<'online' | 'connecting' | 'offline'>('offline')
