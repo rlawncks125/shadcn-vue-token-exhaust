@@ -52,6 +52,7 @@ const AnimatedMobileInstallPrompt = defineAsyncComponent(() => import('#registry
 const AnimatedMobileNativeShare = defineAsyncComponent(() => import('#registry/default/animated-mobile-native-share/AnimatedMobileNativeShare.vue'))
 const AnimatedMobileBluetoothPairing = defineAsyncComponent(() => import('#registry/default/animated-mobile-bluetooth-pairing/AnimatedMobileBluetoothPairing.vue'))
 const AnimatedMobileFileExport = defineAsyncComponent(() => import('#registry/default/animated-mobile-file-export/AnimatedMobileFileExport.vue'))
+const AnimatedMobileLocationCheckIn = defineAsyncComponent(() => import('#registry/default/animated-mobile-location-check-in/AnimatedMobileLocationCheckIn.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -150,7 +151,8 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-file-export'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#d7c6b7] p-4"><AnimatedMobileFileExport content="time,latitude,longitude" filename="route.csv" mime-type="text/csv" extension=".csv" :duration="180" /></div>
+    <div v-if="slug === 'animated-mobile-location-check-in'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#c2cec3] p-4"><AnimatedMobileLocationCheckIn :duration="180" /></div>
+    <div v-else-if="slug === 'animated-mobile-file-export'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#d7c6b7] p-4"><AnimatedMobileFileExport content="time,latitude,longitude" filename="route.csv" mime-type="text/csv" extension=".csv" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-bluetooth-pairing'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#aebfb8] p-4"><AnimatedMobileBluetoothPairing :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-native-share'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#b9cac3] p-4"><AnimatedMobileNativeShare title="Tide pool conditions" text="Low tide revealed a dense field of anemones." url="https://example.com/notes/42" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-install-prompt'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#c7bfaf] p-4"><AnimatedMobileInstallPrompt v-model="installPromptOpen" :duration="180" /></div>

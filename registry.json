@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-location-check-in", "type": "registry:component", "title": "Animated Mobile Location Check-In",
+      "description": "A functional Geolocation API check-in with high-accuracy options, timeout and permission errors, coordinate feedback, refresh, and confirmation.",
+      "categories": ["forms", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-location-check-in/AnimatedMobileLocationCheckIn.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-file-export", "type": "registry:component", "title": "Animated Mobile File Export",
       "description": "A functional File System Access export card with writable-stream saving, cancellation handling, file metadata, and Blob download fallback.",
       "categories": ["forms", "mobile", "web-api", "interactive"],

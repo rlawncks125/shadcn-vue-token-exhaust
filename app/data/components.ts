@@ -50,6 +50,17 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-location-check-in', name: 'Animated Mobile Location Check-In', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional Geolocation API check-in with high-accuracy options, timeout and permission errors, coordinate feedback, refresh, and confirmation.', tags: ['geolocation', 'check-in', 'web-api'],
+    props: [
+      { name: 'highAccuracy / timeout / maximumAge', type: 'boolean / number', default: 'true / 10000 / 0', description: 'Options passed to getCurrentPosition.' },
+      { name: 'autoRequest', type: 'boolean', default: 'false', description: 'Requests coordinates after mount instead of a user action.' },
+      { name: 'title / description / labels', type: 'string', default: 'Check-in defaults', description: 'Visible context and action copy.' },
+      { name: 'located / confirm / clear / denied / error', type: 'events', default: '-', description: 'Reports location and permission lifecycle.' },
+      { name: 'locate / confirm / clear', type: 'exposed methods', default: '-', description: 'Programmatic location controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-file-export', name: 'Animated Mobile File Export', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A functional File System Access export card with writable-stream saving, cancellation handling, file metadata, and Blob download fallback.', tags: ['file', 'export', 'web-api'],
     props: [

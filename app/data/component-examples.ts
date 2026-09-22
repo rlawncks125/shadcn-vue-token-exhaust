@@ -1,4 +1,12 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-location-check-in': `<template>
+  <AnimatedMobileLocationCheckIn
+    :high-accuracy="true"
+    :timeout="12000"
+    @confirm="location => saveCheckIn(location)"
+    @denied="message => showLocationHelp(message)"
+  />
+</template>`,
   'animated-mobile-file-export': `<script setup lang="ts">
 const csv = 'time,latitude,longitude\\n08:30,37.7749,-122.4194'
 </script>

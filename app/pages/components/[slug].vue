@@ -454,6 +454,12 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const locationHighAccuracy = ref(true)
+const locationTimeout = ref(10000)
+const locationMaximumAge = ref(0)
+const locationAutoRequest = ref(false)
+const locationDuration = ref(280)
+const locationDisabled = ref(false)
 const fileExportFallback = ref(true)
 const fileExportDuration = ref(260)
 const fileExportDisabled = ref(false)
@@ -619,6 +625,12 @@ async function copyExample() {
 }
 
 function resetControls() {
+  locationHighAccuracy.value = true
+  locationTimeout.value = 10000
+  locationMaximumAge.value = 0
+  locationAutoRequest.value = false
+  locationDuration.value = 280
+  locationDisabled.value = false
   fileExportFallback.value = true
   fileExportDuration.value = 260
   fileExportDisabled.value = false
@@ -1256,7 +1268,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileFileExportPreview v-if="item.slug === 'animated-mobile-file-export'" :fallback-download="fileExportFallback" :duration="fileExportDuration" :disabled="fileExportDisabled" />
+            <LazyPreviewsAnimatedMobileLocationCheckInPreview v-if="item.slug === 'animated-mobile-location-check-in'" :high-accuracy="locationHighAccuracy" :timeout="locationTimeout" :maximum-age="locationMaximumAge" :auto-request="locationAutoRequest" :duration="locationDuration" :disabled="locationDisabled" />
+            <LazyPreviewsAnimatedMobileFileExportPreview v-else-if="item.slug === 'animated-mobile-file-export'" :fallback-download="fileExportFallback" :duration="fileExportDuration" :disabled="fileExportDisabled" />
             <LazyPreviewsAnimatedMobileBluetoothPairingPreview v-else-if="item.slug === 'animated-mobile-bluetooth-pairing'" :name-prefix="bluetoothNamePrefix" :service="bluetoothService" :auto-connect="bluetoothAutoConnect" :disconnect-on-unmount="bluetoothDisconnectOnUnmount" :duration="bluetoothDuration" :disabled="bluetoothDisabled" />
             <LazyPreviewsAnimatedMobileNativeSharePreview v-else-if="item.slug === 'animated-mobile-native-share'" :fallback="nativeShareFallback" :duration="nativeShareDuration" :disabled="nativeShareDisabled" />
             <LazyPreviewsAnimatedMobileInstallPromptPreview v-else-if="item.slug === 'animated-mobile-install-prompt'" :auto-show="installPromptAutoShow" :close-on-choice="installPromptCloseOnChoice" :dismissible="installPromptDismissible" :duration="installPromptDuration" :disabled="installPromptDisabled" />
@@ -1426,6 +1439,14 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-location-check-in'" class="space-y-5">
+              <label class="flex items-center justify-between text-xs">High accuracy <input v-model="locationHighAccuracy" type="checkbox" class="accent-black"></label>
+              <label class="block text-xs">Timeout · {{ locationTimeout }}ms<input v-model.number="locationTimeout" type="range" min="1000" max="30000" step="1000" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Cached position · {{ locationMaximumAge }}ms<input v-model.number="locationMaximumAge" type="range" min="0" max="60000" step="5000" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Request on mount <input v-model="locationAutoRequest" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="locationDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Geolocation requires HTTPS and user permission. Prefer the explicit button unless the surrounding flow already explains why location is needed.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-file-export'" class="space-y-5">
               <label class="flex items-center justify-between text-xs">Download fallback <input v-model="fileExportFallback" type="checkbox" class="accent-black"></label>
               <label class="block text-xs">Status duration · {{ fileExportDuration }}ms<input v-model.number="fileExportDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
