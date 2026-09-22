@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-install-prompt', name: 'Animated Mobile Install Prompt', category: 'feedback', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional PWA install card that captures beforeinstallprompt, resolves userChoice, detects app installation and standalone mode, and provides iOS guidance.', tags: ['pwa', 'install', 'web-api'],
+    props: [
+      { name: 'modelValue', type: 'boolean', default: 'true', description: 'Controlled visibility of the install card.' },
+      { name: 'appName / description / labels', type: 'string', default: 'Install defaults', description: 'Application identity, context, and action copy.' },
+      { name: 'autoShow / closeOnChoice / dismissible', type: 'boolean', default: 'true / true / true', description: 'Prompt availability and dismissal behavior.' },
+      { name: 'duration / disabled', type: 'number / boolean', default: '280 / false', description: 'Card transition timing and interaction state.' },
+      { name: 'available / prompt / choice / installed / dismiss / error', type: 'events', default: '-', description: 'Reports the complete browser install lifecycle.' },
+      { name: 'install / dismiss / show', type: 'exposed methods', default: '-', description: 'Programmatic install and visibility controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-contact-picker', name: 'Animated Mobile Contact Picker', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A functional Contact Picker API control with approved field selection, single or multiple results, privacy feedback, and unsupported fallback.', tags: ['contacts', 'picker', 'web-api'],
     props: [

@@ -1,4 +1,16 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-install-prompt': `<script setup lang="ts">
+const installCardOpen = ref(true)
+</script>
+
+<template>
+  <AnimatedMobileInstallPrompt
+    v-model="installCardOpen"
+    app-name="Field Notes"
+    @choice="(outcome, platform) => trackInstall(outcome, platform)"
+    @installed="finishOnboarding()"
+  />
+</template>`,
   'animated-mobile-contact-picker': `<script setup lang="ts">
 import type { AnimatedMobileContact } from '@/components/animated-mobile-contact-picker/AnimatedMobileContactPicker.vue'
 const contacts = ref<AnimatedMobileContact[]>([])

@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-install-prompt", "type": "registry:component", "title": "Animated Mobile Install Prompt",
+      "description": "A functional PWA install card that captures beforeinstallprompt, resolves userChoice, detects app installation and standalone mode, and provides iOS guidance.",
+      "categories": ["feedback", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-install-prompt/AnimatedMobileInstallPrompt.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-contact-picker", "type": "registry:component", "title": "Animated Mobile Contact Picker",
       "description": "A functional Contact Picker API control with approved field selection, single or multiple results, privacy feedback, and unsupported fallback.",
       "categories": ["forms", "mobile", "web-api", "interactive"],

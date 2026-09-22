@@ -48,6 +48,7 @@ const AnimatedMobileCompass = defineAsyncComponent(() => import('#registry/defau
 const AnimatedMobileScanner = defineAsyncComponent(() => import('#registry/default/animated-mobile-scanner/AnimatedMobileScanner.vue'))
 const AnimatedMobileWakeLock = defineAsyncComponent(() => import('#registry/default/animated-mobile-wake-lock/AnimatedMobileWakeLock.vue'))
 const AnimatedMobileContactPicker = defineAsyncComponent(() => import('#registry/default/animated-mobile-contact-picker/AnimatedMobileContactPicker.vue'))
+const AnimatedMobileInstallPrompt = defineAsyncComponent(() => import('#registry/default/animated-mobile-install-prompt/AnimatedMobileInstallPrompt.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -129,6 +130,7 @@ const connectivityOpen = ref(true)
 const scannerTorch = ref(false)
 const wakeLockEnabled = ref(false)
 const latestContacts = ref([])
+const installPromptOpen = ref(true)
 
 function latestArtwork(label: string, background: string, accent: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="${background}"/><circle cx="620" cy="130" r="180" fill="${accent}"/><path d="M0 470 180 280l140 130 130-210 210 260 140-125v265H0Z" fill="#f5efdc" fill-opacity=".75"/><text x="42" y="62" fill="#fff" font-family="sans-serif" font-size="22" font-weight="700" letter-spacing="5">${label}</text></svg>`
@@ -145,7 +147,8 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-contact-picker'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#d7cbbd] p-4"><AnimatedMobileContactPicker v-model="latestContacts" :duration="180" /></div>
+    <div v-if="slug === 'animated-mobile-install-prompt'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#c7bfaf] p-4"><AnimatedMobileInstallPrompt v-model="installPromptOpen" :duration="180" /></div>
+    <div v-else-if="slug === 'animated-mobile-contact-picker'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#d7cbbd] p-4"><AnimatedMobileContactPicker v-model="latestContacts" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-wake-lock'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#c7d0c4] p-4"><AnimatedMobileWakeLock v-model="wakeLockEnabled" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-scanner'" class="mx-auto w-full max-w-[300px]"><AnimatedMobileScanner v-model:torch="scannerTorch" class="min-h-[430px]" :duration="180" :managed="false" /></div>
     <div v-else-if="slug === 'animated-mobile-compass'" class="mx-auto w-full max-w-[340px] rounded-[22px] bg-[#b7c6bb] p-3"><AnimatedMobileCompass :heading="32" :target-bearing="118" target-label="North marker" distance="240 m" :accuracy="6" :duration="180" :sensor="false" /></div>

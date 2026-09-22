@@ -454,6 +454,11 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const installPromptAutoShow = ref(true)
+const installPromptCloseOnChoice = ref(true)
+const installPromptDismissible = ref(true)
+const installPromptDuration = ref(280)
+const installPromptDisabled = ref(false)
 const contactPickerMultiple = ref(false)
 const contactPickerDuration = ref(260)
 const contactPickerDisabled = ref(false)
@@ -602,6 +607,11 @@ async function copyExample() {
 }
 
 function resetControls() {
+  installPromptAutoShow.value = true
+  installPromptCloseOnChoice.value = true
+  installPromptDismissible.value = true
+  installPromptDuration.value = 280
+  installPromptDisabled.value = false
   contactPickerMultiple.value = false
   contactPickerDuration.value = 260
   contactPickerDisabled.value = false
@@ -1222,7 +1232,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileContactPickerPreview v-if="item.slug === 'animated-mobile-contact-picker'" :multiple="contactPickerMultiple" :duration="contactPickerDuration" :disabled="contactPickerDisabled" />
+            <LazyPreviewsAnimatedMobileInstallPromptPreview v-if="item.slug === 'animated-mobile-install-prompt'" :auto-show="installPromptAutoShow" :close-on-choice="installPromptCloseOnChoice" :dismissible="installPromptDismissible" :duration="installPromptDuration" :disabled="installPromptDisabled" />
+            <LazyPreviewsAnimatedMobileContactPickerPreview v-else-if="item.slug === 'animated-mobile-contact-picker'" :multiple="contactPickerMultiple" :duration="contactPickerDuration" :disabled="contactPickerDisabled" />
             <LazyPreviewsAnimatedMobileWakeLockPreview v-else-if="item.slug === 'animated-mobile-wake-lock'" :auto-reacquire="wakeLockAutoReacquire" :duration="wakeLockDuration" :disabled="wakeLockDisabled" />
             <LazyPreviewsAnimatedMobileScannerPreview v-else-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" :managed="scannerManaged" />
             <LazyPreviewsAnimatedMobileCompassPreview v-else-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" :sensor="compassSensor" />
@@ -1388,6 +1399,14 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-install-prompt'" class="space-y-5">
+              <label class="flex items-center justify-between text-xs">Show when available <input v-model="installPromptAutoShow" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Close after choice <input v-model="installPromptCloseOnChoice" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Dismissible <input v-model="installPromptDismissible" type="checkbox" class="accent-black"></label>
+              <label class="block text-xs">Motion duration · {{ installPromptDuration }}ms<input v-model.number="installPromptDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="installPromptDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">The install action becomes available only after the browser emits beforeinstallprompt. Installed and iOS standalone experiences are detected automatically.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-contact-picker'" class="space-y-5">
               <label class="flex items-center justify-between text-xs">Multiple contacts <input v-model="contactPickerMultiple" type="checkbox" class="accent-black"></label>
               <label class="block text-xs">Motion duration · {{ contactPickerDuration }}ms<input v-model.number="contactPickerDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
