@@ -454,6 +454,9 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const nativeShareFallback = ref<'clipboard' | 'none'>('clipboard')
+const nativeShareDuration = ref(240)
+const nativeShareDisabled = ref(false)
 const installPromptAutoShow = ref(true)
 const installPromptCloseOnChoice = ref(true)
 const installPromptDismissible = ref(true)
@@ -607,6 +610,9 @@ async function copyExample() {
 }
 
 function resetControls() {
+  nativeShareFallback.value = 'clipboard'
+  nativeShareDuration.value = 240
+  nativeShareDisabled.value = false
   installPromptAutoShow.value = true
   installPromptCloseOnChoice.value = true
   installPromptDismissible.value = true
@@ -1232,7 +1238,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileInstallPromptPreview v-if="item.slug === 'animated-mobile-install-prompt'" :auto-show="installPromptAutoShow" :close-on-choice="installPromptCloseOnChoice" :dismissible="installPromptDismissible" :duration="installPromptDuration" :disabled="installPromptDisabled" />
+            <LazyPreviewsAnimatedMobileNativeSharePreview v-if="item.slug === 'animated-mobile-native-share'" :fallback="nativeShareFallback" :duration="nativeShareDuration" :disabled="nativeShareDisabled" />
+            <LazyPreviewsAnimatedMobileInstallPromptPreview v-else-if="item.slug === 'animated-mobile-install-prompt'" :auto-show="installPromptAutoShow" :close-on-choice="installPromptCloseOnChoice" :dismissible="installPromptDismissible" :duration="installPromptDuration" :disabled="installPromptDisabled" />
             <LazyPreviewsAnimatedMobileContactPickerPreview v-else-if="item.slug === 'animated-mobile-contact-picker'" :multiple="contactPickerMultiple" :duration="contactPickerDuration" :disabled="contactPickerDisabled" />
             <LazyPreviewsAnimatedMobileWakeLockPreview v-else-if="item.slug === 'animated-mobile-wake-lock'" :auto-reacquire="wakeLockAutoReacquire" :duration="wakeLockDuration" :disabled="wakeLockDisabled" />
             <LazyPreviewsAnimatedMobileScannerPreview v-else-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" :managed="scannerManaged" />
@@ -1399,6 +1406,12 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-native-share'" class="space-y-5">
+              <label class="block"><span class="mb-2 block text-xs">Unsupported fallback</span><select v-model="nativeShareFallback" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="clipboard">Copy to clipboard</option><option value="none">No fallback</option></select></label>
+              <label class="block text-xs">Status duration · {{ nativeShareDuration }}ms<input v-model.number="nativeShareDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="nativeShareDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">The native share sheet opens only from a user tap. File payloads are checked with canShare before opening.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-install-prompt'" class="space-y-5">
               <label class="flex items-center justify-between text-xs">Show when available <input v-model="installPromptAutoShow" type="checkbox" class="accent-black"></label>
               <label class="flex items-center justify-between text-xs">Close after choice <input v-model="installPromptCloseOnChoice" type="checkbox" class="accent-black"></label>

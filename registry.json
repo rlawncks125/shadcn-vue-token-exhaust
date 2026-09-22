@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-native-share", "type": "registry:component", "title": "Animated Mobile Native Share",
+      "description": "A functional Web Share API card with native share-sheet lifecycle, file capability checks, cancellation handling, and clipboard fallback.",
+      "categories": ["feedback", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-native-share/AnimatedMobileNativeShare.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-install-prompt", "type": "registry:component", "title": "Animated Mobile Install Prompt",
       "description": "A functional PWA install card that captures beforeinstallprompt, resolves userChoice, detects app installation and standalone mode, and provides iOS guidance.",
       "categories": ["feedback", "mobile", "web-api", "interactive"],

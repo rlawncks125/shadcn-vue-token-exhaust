@@ -50,6 +50,17 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-native-share', name: 'Animated Mobile Native Share', category: 'feedback', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional Web Share API card with native share-sheet lifecycle, file capability checks, cancellation handling, and clipboard fallback.', tags: ['share', 'native', 'web-api'],
+    props: [
+      { name: 'title / text / url / files', type: 'ShareData fields', default: '-', description: 'Content passed to the native share sheet.' },
+      { name: 'fallback', type: "'clipboard' | 'none'", default: 'clipboard', description: 'Behavior when the Web Share API is unavailable.' },
+      { name: 'label / description / shareLabel', type: 'string', default: 'Share defaults', description: 'Visible context and action copy.' },
+      { name: 'duration / disabled', type: 'number / boolean', default: '240 / false', description: 'Status transition timing and interaction state.' },
+      { name: 'share / shared / cancel / copied / unsupported / error', type: 'events', default: '-', description: 'Reports native sharing and fallback lifecycle.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-install-prompt', name: 'Animated Mobile Install Prompt', category: 'feedback', status: 'Ready', updated: '2026.09.22',
     description: 'A functional PWA install card that captures beforeinstallprompt, resolves userChoice, detects app installation and standalone mode, and provides iOS guidance.', tags: ['pwa', 'install', 'web-api'],
     props: [

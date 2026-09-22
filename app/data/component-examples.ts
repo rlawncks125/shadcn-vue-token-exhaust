@@ -1,4 +1,12 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-native-share': `<template>
+  <AnimatedMobileNativeShare
+    title="Tide pool conditions"
+    text="Low tide revealed a dense field of anemones."
+    :url="noteUrl"
+    @shared="trackShare()"
+  />
+</template>`,
   'animated-mobile-install-prompt': `<script setup lang="ts">
 const installCardOpen = ref(true)
 </script>
