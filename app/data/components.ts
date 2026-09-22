@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-contact-picker', name: 'Animated Mobile Contact Picker', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional Contact Picker API control with approved field selection, single or multiple results, privacy feedback, and unsupported fallback.', tags: ['contacts', 'picker', 'web-api'],
+    props: [
+      { name: 'modelValue', type: 'AnimatedMobileContact[]', default: '[]', description: 'Controlled contacts returned by the device picker.' },
+      { name: 'fields', type: 'AnimatedMobileContactField[]', default: 'name, email, tel', description: 'Contact properties requested from the user.' },
+      { name: 'multiple', type: 'boolean', default: 'false', description: 'Allows selecting more than one contact where supported.' },
+      { name: 'title / description / labels', type: 'string', default: 'Picker defaults', description: 'Localized context, empty state, and action copy.' },
+      { name: 'duration / disabled', type: 'number / boolean', default: '260 / false', description: 'Result transition timing and interaction state.' },
+      { name: 'select / clear / cancel / error / unsupported', type: 'events', default: '-', description: 'Reports the Contact Picker API lifecycle.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-wake-lock', name: 'Animated Mobile Wake Lock', category: 'feedback', status: 'Ready', updated: '2026.09.22',
     description: 'A functional Screen Wake Lock control with request and release lifecycle, visibility recovery, unsupported fallback, and accessible status feedback.', tags: ['wake-lock', 'screen', 'web-api'],
     props: [

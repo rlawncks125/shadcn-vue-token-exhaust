@@ -1,4 +1,17 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-contact-picker': `<script setup lang="ts">
+import type { AnimatedMobileContact } from '@/components/animated-mobile-contact-picker/AnimatedMobileContactPicker.vue'
+const contacts = ref<AnimatedMobileContact[]>([])
+</script>
+
+<template>
+  <AnimatedMobileContactPicker
+    v-model="contacts"
+    :fields="['name', 'email', 'tel']"
+    multiple
+    @select="inviteContacts"
+  />
+</template>`,
   'animated-mobile-wake-lock': `<script setup lang="ts">
 const keepAwake = ref(false)
 </script>

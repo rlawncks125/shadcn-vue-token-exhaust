@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-contact-picker", "type": "registry:component", "title": "Animated Mobile Contact Picker",
+      "description": "A functional Contact Picker API control with approved field selection, single or multiple results, privacy feedback, and unsupported fallback.",
+      "categories": ["forms", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-contact-picker/AnimatedMobileContactPicker.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-wake-lock", "type": "registry:component", "title": "Animated Mobile Wake Lock",
       "description": "A functional Screen Wake Lock control with request and release lifecycle, visibility recovery, unsupported fallback, and accessible status feedback.",
       "categories": ["feedback", "mobile", "web-api", "interactive"],

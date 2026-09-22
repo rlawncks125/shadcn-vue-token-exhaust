@@ -454,6 +454,9 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const contactPickerMultiple = ref(false)
+const contactPickerDuration = ref(260)
+const contactPickerDisabled = ref(false)
 const wakeLockAutoReacquire = ref(true)
 const wakeLockDuration = ref(280)
 const wakeLockDisabled = ref(false)
@@ -599,6 +602,9 @@ async function copyExample() {
 }
 
 function resetControls() {
+  contactPickerMultiple.value = false
+  contactPickerDuration.value = 260
+  contactPickerDisabled.value = false
   wakeLockAutoReacquire.value = true
   wakeLockDuration.value = 280
   wakeLockDisabled.value = false
@@ -1216,7 +1222,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileWakeLockPreview v-if="item.slug === 'animated-mobile-wake-lock'" :auto-reacquire="wakeLockAutoReacquire" :duration="wakeLockDuration" :disabled="wakeLockDisabled" />
+            <LazyPreviewsAnimatedMobileContactPickerPreview v-if="item.slug === 'animated-mobile-contact-picker'" :multiple="contactPickerMultiple" :duration="contactPickerDuration" :disabled="contactPickerDisabled" />
+            <LazyPreviewsAnimatedMobileWakeLockPreview v-else-if="item.slug === 'animated-mobile-wake-lock'" :auto-reacquire="wakeLockAutoReacquire" :duration="wakeLockDuration" :disabled="wakeLockDisabled" />
             <LazyPreviewsAnimatedMobileScannerPreview v-else-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" :managed="scannerManaged" />
             <LazyPreviewsAnimatedMobileCompassPreview v-else-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" :sensor="compassSensor" />
             <LazyPreviewsAnimatedMobileConnectivityBarPreview v-else-if="item.slug === 'animated-mobile-connectivity-bar'" :state="connectivityState" :auto-hide="connectivityAutoHide" :duration="connectivityDuration" :dismissible="connectivityDismissible" :disabled="connectivityDisabled" />
@@ -1381,6 +1388,12 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-contact-picker'" class="space-y-5">
+              <label class="flex items-center justify-between text-xs">Multiple contacts <input v-model="contactPickerMultiple" type="checkbox" class="accent-black"></label>
+              <label class="block text-xs">Motion duration · {{ contactPickerDuration }}ms<input v-model.number="contactPickerDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="contactPickerDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">The picker opens only from a user tap and returns only approved fields. It currently requires HTTPS on supported Android Chromium browsers.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-wake-lock'" class="space-y-5">
               <label class="flex items-center justify-between text-xs">Reacquire on return <input v-model="wakeLockAutoReacquire" type="checkbox" class="accent-black"></label>
               <label class="block text-xs">Motion duration · {{ wakeLockDuration }}ms<input v-model.number="wakeLockDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
