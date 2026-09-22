@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-wake-lock', name: 'Animated Mobile Wake Lock', category: 'feedback', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional Screen Wake Lock control with request and release lifecycle, visibility recovery, unsupported fallback, and accessible status feedback.', tags: ['wake-lock', 'screen', 'web-api'],
+    props: [
+      { name: 'modelValue', type: 'boolean', default: 'false', description: 'Controlled intent to keep the screen awake.' },
+      { name: 'title / description / labels', type: 'string', default: 'Session defaults', description: 'Localized context, status, and action copy.' },
+      { name: 'autoReacquire', type: 'boolean', default: 'true', description: 'Requests a new lock when a hidden tab becomes visible.' },
+      { name: 'duration / disabled', type: 'number / boolean', default: '280 / false', description: 'Visual transition timing and interaction state.' },
+      { name: 'request / acquired / release / error / unsupported', type: 'events', default: '-', description: 'Reports the complete Wake Lock API lifecycle.' },
+      { name: 'acquire / release / toggle', type: 'exposed methods', default: '-', description: 'Programmatic lock controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-scanner', name: 'Animated Mobile Scanner', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A functional mobile barcode scanner using getUserMedia and BarcodeDetector, with torch, camera flip, gallery decoding, and result states.', tags: ['scanner', 'camera', 'mobile'],
     props: [

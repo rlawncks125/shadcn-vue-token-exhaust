@@ -454,6 +454,9 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const wakeLockAutoReacquire = ref(true)
+const wakeLockDuration = ref(280)
+const wakeLockDisabled = ref(false)
 const scannerState = ref<'scanning' | 'paused' | 'success' | 'error'>('scanning')
 const scannerDuration = ref(300)
 const scannerAllowTorch = ref(true)
@@ -596,6 +599,9 @@ async function copyExample() {
 }
 
 function resetControls() {
+  wakeLockAutoReacquire.value = true
+  wakeLockDuration.value = 280
+  wakeLockDisabled.value = false
   scannerState.value = 'scanning'
   scannerDuration.value = 300
   scannerAllowTorch.value = true
@@ -1210,7 +1216,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileScannerPreview v-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" :managed="scannerManaged" />
+            <LazyPreviewsAnimatedMobileWakeLockPreview v-if="item.slug === 'animated-mobile-wake-lock'" :auto-reacquire="wakeLockAutoReacquire" :duration="wakeLockDuration" :disabled="wakeLockDisabled" />
+            <LazyPreviewsAnimatedMobileScannerPreview v-else-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" :managed="scannerManaged" />
             <LazyPreviewsAnimatedMobileCompassPreview v-else-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" :sensor="compassSensor" />
             <LazyPreviewsAnimatedMobileConnectivityBarPreview v-else-if="item.slug === 'animated-mobile-connectivity-bar'" :state="connectivityState" :auto-hide="connectivityAutoHide" :duration="connectivityDuration" :dismissible="connectivityDismissible" :disabled="connectivityDisabled" />
             <LazyPreviewsAnimatedMobileVoiceRecorderPreview v-else-if="item.slug === 'animated-mobile-voice-recorder'" :max-duration="voiceRecorderMaxDuration" :duration="voiceRecorderDuration" :haptic="voiceRecorderHaptic" :disabled="voiceRecorderDisabled" />
@@ -1374,6 +1381,12 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-wake-lock'" class="space-y-5">
+              <label class="flex items-center justify-between text-xs">Reacquire on return <input v-model="wakeLockAutoReacquire" type="checkbox" class="accent-black"></label>
+              <label class="block text-xs">Motion duration · {{ wakeLockDuration }}ms<input v-model.number="wakeLockDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="wakeLockDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Tap Keep awake to call the real Screen Wake Lock API. Browsers require HTTPS and may release the lock when the tab is hidden or battery policy changes.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-scanner'" class="space-y-5">
               <label class="block"><span class="mb-2 block text-xs">Scanner state</span><select v-model="scannerState" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="scanning">Scanning</option><option value="paused">Paused</option><option value="success">Success</option><option value="error">Error</option></select></label>
               <label class="block text-xs">Result motion · {{ scannerDuration }}ms<input v-model.number="scannerDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>

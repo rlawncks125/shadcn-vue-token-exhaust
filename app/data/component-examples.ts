@@ -1,4 +1,16 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-wake-lock': `<script setup lang="ts">
+const keepAwake = ref(false)
+</script>
+
+<template>
+  <AnimatedMobileWakeLock
+    v-model="keepAwake"
+    title="Keep route recorder awake"
+    description="Prevent the display from sleeping while GPS recording is active."
+    @error="message => showWakeLockHelp(message)"
+  />
+</template>`,
   'animated-mobile-scanner': `<script setup lang="ts">
 const torch = ref(false)
 </script>

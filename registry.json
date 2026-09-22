@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-wake-lock", "type": "registry:component", "title": "Animated Mobile Wake Lock",
+      "description": "A functional Screen Wake Lock control with request and release lifecycle, visibility recovery, unsupported fallback, and accessible status feedback.",
+      "categories": ["feedback", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-wake-lock/AnimatedMobileWakeLock.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-scanner", "type": "registry:component", "title": "Animated Mobile Scanner",
       "description": "A functional mobile barcode scanner using getUserMedia and BarcodeDetector, with torch, camera flip, gallery decoding, and result states.",
       "categories": ["forms", "mobile", "animation", "interactive"],
