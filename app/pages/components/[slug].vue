@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ArrowLeft, Check, Copy, ExternalLink, RotateCcw } from '@lucide/vue'
-import StatusPulse from '#registry/default/status-pulse/StatusPulse.vue'
 import MagneticButton from '#registry/default/magnetic-button/MagneticButton.vue'
 import { getCategory, getInstallCommand, getRegistryComponent } from '@/data/components'
 import { getComponentExample } from '@/data/component-examples'
@@ -228,6 +227,8 @@ const spotlightDisabled = ref(false)
 const statusLabel = ref('All systems operational')
 const statusTone = ref<'lime' | 'blue' | 'orange'>('lime')
 const compact = ref(false)
+const statusPaused = ref(false)
+const statusDuration = ref(1600)
 const scrambleText = ref('Build remarkable interfaces.')
 const scrambleTrigger = ref<'hover' | 'click' | 'load'>('hover')
 const scrambleDuration = ref(800)
@@ -1088,6 +1089,8 @@ function resetControls() {
   statusLabel.value = 'All systems operational'
   statusTone.value = 'lime'
   compact.value = false
+  statusPaused.value = false
+  statusDuration.value = 1600
   scrambleText.value = 'Build remarkable interfaces.'
   scrambleTrigger.value = 'hover'
   scrambleDuration.value = 800
@@ -1225,7 +1228,7 @@ useHead(() => ({
             <LazyPreviewsGuidedTourPreview v-else-if="item.slug === 'guided-tour'" :duration="tourDuration" :close-on-backdrop="tourCloseOnBackdrop" :lock-scroll="tourLockScroll" :disabled="tourDisabled" />
             <LazyPreviewsInteractiveHoverButtonPreview v-else-if="item.slug === 'interactive-hover-button'" :label="buttonLabel" :accent="accent" :duration="hoverButtonDuration" :disabled="hoverButtonDisabled" :loading="hoverButtonLoading" />
           <LazyPreviewsSpotlightCardPreview v-else-if="item.slug === 'spotlight-card'" :title="cardTitle" :glow="accent" :radius="spotlightRadius" :intensity="spotlightIntensity" :duration="spotlightDuration" :interactive="spotlightInteractive" :disabled="spotlightDisabled" />
-          <StatusPulse v-else-if="item.slug === 'status-pulse'" :label="statusLabel" :tone="statusTone" :compact="compact" />
+          <LazyPreviewsStatusPulsePreview v-else-if="item.slug === 'status-pulse'" :label="statusLabel" :tone="statusTone" :compact="compact" :paused="statusPaused" :duration="statusDuration" />
           <PreviewsAnimatedTabsPreview v-else-if="item.slug === 'animated-tabs'" :accent="accent" :disabled="tabDisabled" />
           <PreviewsTiltCardPreview v-else-if="item.slug === 'tilt-card'" :max-tilt="tiltAmount" :glare="tiltGlare" :disabled="tiltDisabled" />
           <PreviewsFloatingDockPreview v-else-if="item.slug === 'floating-dock'" :magnification="dockMagnification" :accent="accent" :disabled="dockDisabled" />
@@ -2197,6 +2200,8 @@ useHead(() => ({
               Compact mode
               <input v-model="compact" type="checkbox" class="size-4 accent-black">
             </label>
+            <label class="mt-4 flex items-center justify-between text-xs text-black/55">Pause pulse<input v-model="statusPaused" type="checkbox" class="size-4 accent-black"></label>
+            <label class="mt-4 block text-xs text-black/55">Duration · {{ statusDuration }}ms<input v-model.number="statusDuration" type="range" min="400" max="4000" step="100" class="mt-3 w-full accent-black"></label>
           </div>
 
           <div v-if="item.slug === 'text-scramble'" class="space-y-5">

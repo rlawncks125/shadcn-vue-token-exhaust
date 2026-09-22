@@ -1480,15 +1480,17 @@ export const registryComponents: RegistryComponent[] = [
   {
     slug: 'status-pulse',
     name: 'Status Pulse',
-    description: 'A compact status indicator with a restrained pulse and semantic color themes.',
+    description: 'A compact live status indicator with semantic themes, controllable pulse timing, and reduced-motion support.',
     category: 'feedback',
     status: 'Ready',
-    updated: '2026.09.16',
-    tags: ['status', 'indicator', 'pulse'],
+    updated: '2026.09.22',
+    tags: ['status', 'indicator', 'mobile'],
     props: [
       { name: 'label', type: 'string', default: 'All systems operational', description: 'Status message.' },
       { name: 'tone', type: "'lime' | 'blue' | 'orange'", default: 'lime', description: 'Semantic color theme.' },
       { name: 'compact', type: 'boolean', default: 'false', description: 'Uses reduced spacing and type size.' },
+      { name: 'paused / duration', type: 'boolean / number', default: 'false / 1600', description: 'Pulse playback and timing.' },
+      { name: 'live', type: "'off' | 'polite' | 'assertive'", default: 'polite', description: 'Screen-reader announcement priority.' },
     ],
   },
   {
