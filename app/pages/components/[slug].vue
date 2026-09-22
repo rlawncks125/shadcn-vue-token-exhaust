@@ -454,6 +454,12 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const scannerState = ref<'scanning' | 'paused' | 'success' | 'error'>('scanning')
+const scannerDuration = ref(300)
+const scannerAllowTorch = ref(true)
+const scannerAllowFlip = ref(true)
+const scannerAllowGallery = ref(true)
+const scannerDisabled = ref(false)
 const compassHeading = ref(32)
 const compassTargetBearing = ref(118)
 const compassAccuracy = ref(6)
@@ -588,6 +594,12 @@ async function copyExample() {
 }
 
 function resetControls() {
+  scannerState.value = 'scanning'
+  scannerDuration.value = 300
+  scannerAllowTorch.value = true
+  scannerAllowFlip.value = true
+  scannerAllowGallery.value = true
+  scannerDisabled.value = false
   compassHeading.value = 32
   compassTargetBearing.value = 118
   compassAccuracy.value = 6
@@ -1194,7 +1206,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileCompassPreview v-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" />
+            <LazyPreviewsAnimatedMobileScannerPreview v-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" />
+            <LazyPreviewsAnimatedMobileCompassPreview v-else-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" />
             <LazyPreviewsAnimatedMobileConnectivityBarPreview v-else-if="item.slug === 'animated-mobile-connectivity-bar'" :state="connectivityState" :auto-hide="connectivityAutoHide" :duration="connectivityDuration" :dismissible="connectivityDismissible" :disabled="connectivityDisabled" />
             <LazyPreviewsAnimatedMobileVoiceRecorderPreview v-else-if="item.slug === 'animated-mobile-voice-recorder'" :max-duration="voiceRecorderMaxDuration" :duration="voiceRecorderDuration" :haptic="voiceRecorderHaptic" :disabled="voiceRecorderDisabled" />
             <LazyPreviewsAnimatedMobileActionBarPreview v-else-if="item.slug === 'animated-mobile-action-bar'" :duration="actionBarDuration" :safe-area="actionBarSafeArea" :show-close="actionBarShowClose" :loading="actionBarLoading" :disabled="actionBarDisabled" />
@@ -1357,6 +1370,15 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-scanner'" class="space-y-5">
+              <label class="block"><span class="mb-2 block text-xs">Scanner state</span><select v-model="scannerState" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="scanning">Scanning</option><option value="paused">Paused</option><option value="success">Success</option><option value="error">Error</option></select></label>
+              <label class="block text-xs">Result motion · {{ scannerDuration }}ms<input v-model.number="scannerDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Torch control <input v-model="scannerAllowTorch" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Camera flip <input v-model="scannerAllowFlip" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Gallery input <input v-model="scannerAllowGallery" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="scannerDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Place an application-owned video element in the camera slot. Permission, decoding, and stream cleanup stay outside the UI shell.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-compass'" class="space-y-5">
               <label class="block text-xs">Device heading · {{ compassHeading }}°<input v-model.number="compassHeading" type="range" min="0" max="359" step="1" class="mt-3 w-full accent-black"></label>
               <label class="block text-xs">Target bearing · {{ compassTargetBearing }}°<input v-model.number="compassTargetBearing" type="range" min="0" max="359" step="1" class="mt-3 w-full accent-black"></label>

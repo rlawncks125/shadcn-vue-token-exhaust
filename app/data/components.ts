@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-scanner', name: 'Animated Mobile Scanner', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A camera-ready mobile scanner shell with animated targeting, torch and camera controls, gallery input, and controlled scan result states.', tags: ['scanner', 'camera', 'mobile'],
+    props: [
+      { name: 'state', type: "'scanning' | 'paused' | 'success' | 'error'", default: 'scanning', description: 'Controlled scanning lifecycle.' },
+      { name: 'torch / allowTorch / allowFlip / allowGallery', type: 'boolean', default: 'false / true / true / true', description: 'Controlled torch and available capture actions.' },
+      { name: 'instruction / labels / result', type: 'string', default: 'Scanner defaults', description: 'Localized feedback and captured value.' },
+      { name: 'duration / disabled', type: 'number / boolean', default: '300 / false', description: 'Result transition timing and interaction state.' },
+      { name: 'torch / flip / gallery / retry / close', type: 'events', default: '-', description: 'Reports camera and scanner actions.' },
+      { name: '#camera', type: 'slot', default: 'Gradient placeholder', description: 'Accepts the application-owned video or camera view.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-compass', name: 'Animated Mobile Compass', category: 'navigation', status: 'Ready', updated: '2026.09.22',
     description: 'A sensor-ready mobile compass with controlled heading, target bearing, shortest-turn guidance, distance, accuracy, and calibration actions.', tags: ['compass', 'location', 'mobile'],
     props: [

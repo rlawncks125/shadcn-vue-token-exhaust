@@ -1,4 +1,14 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-scanner': `<script setup lang="ts">
+const state = ref<'scanning' | 'paused' | 'success' | 'error'>('scanning')
+const torch = ref(false)
+</script>
+
+<template>
+  <AnimatedMobileScanner v-model:torch="torch" :state="state" @flip="switchCamera()" @gallery="chooseImage()">
+    <template #camera><video ref="camera" autoplay muted playsinline class="size-full object-cover" /></template>
+  </AnimatedMobileScanner>
+</template>`,
   'animated-mobile-compass': `<script setup lang="ts">
 const heading = ref(0)
 const targetBearing = ref(118)
