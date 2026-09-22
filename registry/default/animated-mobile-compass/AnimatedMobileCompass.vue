@@ -49,7 +49,8 @@ function onOrientation(event: DeviceOrientationEvent) {
   emit('heading', sensorHeading.value, (event as OrientationEvent).webkitCompassAccuracy)
 }
 async function startSensor() {
-  if (props.disabled || !props.sensor || typeof window === 'undefined' || !window.DeviceOrientationEvent) return false
+  if (props.disabled || !props.sensor) return false
+  if (typeof window === 'undefined' || !window.DeviceOrientationEvent) { emit('sensor-error', 'DeviceOrientation is not supported by this browser.'); return false }
   try {
     const constructor = window.DeviceOrientationEvent as OrientationConstructor
     if (constructor.requestPermission && await constructor.requestPermission() !== 'granted') throw new Error('Orientation permission was denied.')

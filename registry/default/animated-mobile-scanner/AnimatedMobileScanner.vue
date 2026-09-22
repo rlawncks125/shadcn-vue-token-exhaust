@@ -48,11 +48,13 @@ async function startCamera() {
   if (props.disabled || !props.managed || slots.camera || typeof navigator === 'undefined') return false
   try {
     stopCamera(); setState('scanning')
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error('Camera access is not supported by this browser.')
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: facing.value } }, audio: false })
+    if (!video.value) throw new Error('Camera view is unavailable.')
+    video.value.srcObject = stream; await video.value.play(); emit('camera-start')
     const Constructor = (globalThis as typeof globalThis & { BarcodeDetector?: DetectorConstructor }).BarcodeDetector
     if (!Constructor) throw new Error('BarcodeDetector is not supported by this browser.')
-    detector = new Constructor(); stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: facing.value } }, audio: false })
-    if (!video.value) throw new Error('Camera view is unavailable.')
-    video.value.srcObject = stream; await video.value.play(); emit('camera-start'); scan(); return true
+    detector = new Constructor(); scan(); return true
   }
   catch (error) { reportError(error); return false }
 }

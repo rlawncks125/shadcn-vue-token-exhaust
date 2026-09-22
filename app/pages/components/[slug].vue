@@ -468,7 +468,7 @@ const compassArrivalThreshold = ref(8)
 const compassDuration = ref(420)
 const compassActive = ref(true)
 const compassDisabled = ref(false)
-const compassSensor = ref(false)
+const compassSensor = ref(true)
 const connectivityState = ref<'online' | 'connecting' | 'offline'>('offline')
 const connectivityAutoHide = ref(2400)
 const connectivityDuration = ref(240)
@@ -610,7 +610,7 @@ function resetControls() {
   compassDuration.value = 420
   compassActive.value = true
   compassDisabled.value = false
-  compassSensor.value = false
+  compassSensor.value = true
   connectivityState.value = 'offline'
   connectivityAutoHide.value = 2400
   connectivityDuration.value = 240
