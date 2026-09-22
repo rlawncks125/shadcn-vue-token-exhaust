@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-action-bar', name: 'Animated Mobile Action Bar', category: 'navigation', status: 'Ready', updated: '2026.09.22',
+    description: 'A safe-area-aware mobile CTA bar with primary and secondary actions, loading state, optional dismissal, and fixed or inline placement.', tags: ['action-bar', 'cta', 'mobile'],
+    props: [
+      { name: 'open / title / description', type: 'boolean / string', default: 'true / required / -', description: 'Controlled visibility and compact action context.' },
+      { name: 'primaryLabel / secondaryLabel', type: 'string', default: 'Continue / -', description: 'Main and optional secondary action copy.' },
+      { name: 'fixed / safeArea / showClose', type: 'boolean', default: 'true / true / false', description: 'Placement, device inset, and dismissal control.' },
+      { name: 'duration / loading / disabled', type: 'number / boolean', default: '260 / false / false', description: 'Motion and interaction states.' },
+      { name: 'primary / secondary / close', type: 'events', default: '-', description: 'Reports every action.' },
+      { name: 'close / focus / activatePrimary / activateSecondary', type: 'exposed methods', default: '-', description: 'Programmatic action and focus controls.' },
+    ],
+  },
+  {
     slug: 'animated-slide-to-confirm', name: 'Animated Slide to Confirm', category: 'buttons', status: 'Ready', updated: '2026.09.22',
     description: 'A mobile slide confirmation control with drag resistance, threshold commit, keyboard slider semantics, loading state, and optional reset and haptic feedback.',
     tags: ['slide', 'confirm', 'mobile'],

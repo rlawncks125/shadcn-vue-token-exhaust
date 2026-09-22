@@ -453,6 +453,11 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const actionBarDuration = ref(260)
+const actionBarSafeArea = ref(true)
+const actionBarShowClose = ref(true)
+const actionBarLoading = ref(false)
+const actionBarDisabled = ref(false)
 const slideConfirmThreshold = ref(0.82)
 const slideConfirmDuration = ref(260)
 const slideConfirmResetAfter = ref(0)
@@ -566,6 +571,11 @@ async function copyExample() {
 }
 
 function resetControls() {
+  actionBarDuration.value = 260
+  actionBarSafeArea.value = true
+  actionBarShowClose.value = true
+  actionBarLoading.value = false
+  actionBarDisabled.value = false
   slideConfirmThreshold.value = 0.82
   slideConfirmDuration.value = 260
   slideConfirmResetAfter.value = 0
@@ -1149,7 +1159,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedSlideToConfirmPreview v-if="item.slug === 'animated-slide-to-confirm'" :threshold="slideConfirmThreshold" :duration="slideConfirmDuration" :reset-after="slideConfirmResetAfter" :tone="slideConfirmTone" :haptic="slideConfirmHaptic" :loading="slideConfirmLoading" :disabled="slideConfirmDisabled" />
+            <LazyPreviewsAnimatedMobileActionBarPreview v-if="item.slug === 'animated-mobile-action-bar'" :duration="actionBarDuration" :safe-area="actionBarSafeArea" :show-close="actionBarShowClose" :loading="actionBarLoading" :disabled="actionBarDisabled" />
+            <LazyPreviewsAnimatedSlideToConfirmPreview v-else-if="item.slug === 'animated-slide-to-confirm'" :threshold="slideConfirmThreshold" :duration="slideConfirmDuration" :reset-after="slideConfirmResetAfter" :tone="slideConfirmTone" :haptic="slideConfirmHaptic" :loading="slideConfirmLoading" :disabled="slideConfirmDisabled" />
             <LazyPreviewsAnimatedMobileNumericKeypadPreview v-else-if="item.slug === 'animated-mobile-numeric-keypad'" :mode="keypadMode" :max-length="keypadMaxLength" :masked="keypadMasked" :show-submit="keypadShowSubmit" :auto-submit="keypadAutoSubmit" :haptic="keypadHaptic" :duration="keypadDuration" :disabled="keypadDisabled" />
             <LazyPreviewsAnimatedMobileOnboardingPagerPreview v-else-if="item.slug === 'animated-mobile-onboarding-pager'" :duration="onboardingDuration" :swipe-threshold="onboardingSwipeThreshold" :swipe="onboardingSwipe" :show-skip="onboardingShowSkip" :show-back="onboardingShowBack" :show-progress="onboardingShowProgress" :safe-area="onboardingSafeArea" :disabled="onboardingDisabled" />
             <LazyPreviewsAnimatedMobileFilterBarPreview v-else-if="item.slug === 'animated-mobile-filter-bar'" :duration="mobileFilterDuration" :multiple="mobileFilterMultiple" :show-all="mobileFilterShowAll" :allow-empty="mobileFilterAllowEmpty" :disabled="mobileFilterDisabled" />
@@ -1308,6 +1319,14 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-action-bar'" class="space-y-5">
+              <label class="block text-xs">Transition duration · {{ actionBarDuration }}ms<input v-model.number="actionBarDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Safe-area inset <input v-model="actionBarSafeArea" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Close control <input v-model="actionBarShowClose" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Loading <input v-model="actionBarLoading" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="actionBarDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Use fixed placement for production mobile screens or inline placement inside contained previews. Actions stay at least 44px tall.</p>
+            </div>
             <div v-if="item.slug === 'animated-slide-to-confirm'" class="space-y-5">
               <label class="block text-xs">Commit threshold · {{ Math.round(slideConfirmThreshold * 100) }}%<input v-model.number="slideConfirmThreshold" type="range" min="0.5" max="1" step="0.02" class="mt-3 w-full accent-black"></label>
               <label class="block text-xs">Snap duration · {{ slideConfirmDuration }}ms<input v-model.number="slideConfirmDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>

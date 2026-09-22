@@ -1,4 +1,11 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-action-bar': `<script setup lang="ts">
+const open = ref(true)
+</script>
+
+<template>
+  <AnimatedMobileActionBar v-model:open="open" title="$48 · 1 place" description="Free cancellation until Friday" primary-label="Reserve" secondary-label="Details" @primary="reserve()" />
+</template>`,
   'animated-slide-to-confirm': `<script setup lang="ts">
 const confirmed = ref(false)
 </script>

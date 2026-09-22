@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-action-bar", "type": "registry:component", "title": "Animated Mobile Action Bar",
+      "description": "A safe-area-aware mobile CTA bar with primary and secondary actions, loading state, optional dismissal, and fixed or inline placement.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-action-bar/AnimatedMobileActionBar.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-slide-to-confirm", "type": "registry:component", "title": "Animated Slide to Confirm",
       "description": "A mobile slide confirmation control with drag resistance, threshold commit, keyboard slider semantics, loading state, and optional reset and haptic feedback.",
       "categories": ["buttons", "mobile", "animation", "interactive"],
