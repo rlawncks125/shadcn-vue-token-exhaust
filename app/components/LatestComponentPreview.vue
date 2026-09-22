@@ -40,6 +40,7 @@ const AnimatedMobileMiniPlayer = defineAsyncComponent(() => import('#registry/de
 const AnimatedMobileFilterBar = defineAsyncComponent(() => import('#registry/default/animated-mobile-filter-bar/AnimatedMobileFilterBar.vue'))
 const AnimatedMobileOnboardingPager = defineAsyncComponent(() => import('#registry/default/animated-mobile-onboarding-pager/AnimatedMobileOnboardingPager.vue'))
 const AnimatedMobileNumericKeypad = defineAsyncComponent(() => import('#registry/default/animated-mobile-numeric-keypad/AnimatedMobileNumericKeypad.vue'))
+const AnimatedSlideToConfirm = defineAsyncComponent(() => import('#registry/default/animated-slide-to-confirm/AnimatedSlideToConfirm.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -113,6 +114,7 @@ const selectedMobileFilters = ref<string[]>(['coast'])
 const onboardingStep = ref('collect')
 const onboardingSteps: AnimatedMobileOnboardingStep[] = [{ id: 'collect', title: 'Collect what catches your eye.', description: 'Save details before they disappear.', icon: '01', accent: '#d9ff57' }, { id: 'connect', title: 'Find the thread.', description: 'Connect scattered observations.', icon: '02', accent: '#e4633f' }, { id: 'carry', title: 'Take it outside.', description: 'Keep the archive ready offline.', icon: '03', accent: '#83b9ac' }]
 const keypadValue = ref('')
+const slideConfirmed = ref(false)
 
 function latestArtwork(label: string, background: string, accent: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="${background}"/><circle cx="620" cy="130" r="180" fill="${accent}"/><path d="M0 470 180 280l140 130 130-210 210 260 140-125v265H0Z" fill="#f5efdc" fill-opacity=".75"/><text x="42" y="62" fill="#fff" font-family="sans-serif" font-size="22" font-weight="700" letter-spacing="5">${label}</text></svg>`
@@ -129,7 +131,12 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-numeric-keypad'" class="mx-auto flex h-[300px] w-full max-w-[460px] justify-center overflow-hidden rounded-[22px] bg-[#d8d3c5] p-2">
+    <div v-if="slug === 'animated-slide-to-confirm'" class="mx-auto flex min-h-[300px] w-full max-w-[460px] flex-col justify-between rounded-[22px] bg-[#ddd7c9] p-5">
+      <div><p class="text-[9px] font-bold uppercase tracking-[.18em] text-black/35">Publish field log</p><p class="mt-3 text-2xl font-semibold tracking-[-.05em]">North coast,<br>low tide.</p></div>
+      <AnimatedSlideToConfirm v-model="slideConfirmed" label="Slide to publish" confirmed-label="Published" :duration="180" tone="success" />
+    </div>
+
+    <div v-else-if="slug === 'animated-mobile-numeric-keypad'" class="mx-auto flex h-[300px] w-full max-w-[460px] justify-center overflow-hidden rounded-[22px] bg-[#d8d3c5] p-2">
       <AnimatedMobileNumericKeypad v-model="keypadValue" mode="decimal" label="Transfer amount" placeholder="0.00" :max-length="6" submit-label="Continue" :duration="100" class="w-[360px] shrink-0 origin-top scale-[.69]" />
     </div>
 

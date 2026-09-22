@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-slide-to-confirm", "type": "registry:component", "title": "Animated Slide to Confirm",
+      "description": "A mobile slide confirmation control with drag resistance, threshold commit, keyboard slider semantics, loading state, and optional reset and haptic feedback.",
+      "categories": ["buttons", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-slide-to-confirm/AnimatedSlideToConfirm.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-numeric-keypad", "type": "registry:component", "title": "Animated Mobile Numeric Keypad",
       "description": "A touch-first numeric keypad for amounts, quantities, and PINs with masking, decimal rules, physical keyboard input, and optional haptic feedback.",
       "categories": ["forms", "mobile", "animation", "interactive"],

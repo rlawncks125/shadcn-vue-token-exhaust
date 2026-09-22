@@ -1,4 +1,18 @@
 export const componentExamples: Record<string, string> = {
+  'animated-slide-to-confirm': `<script setup lang="ts">
+const confirmed = ref(false)
+</script>
+
+<template>
+  <AnimatedSlideToConfirm
+    v-model="confirmed"
+    label="Slide to publish"
+    confirmed-label="Field log published"
+    tone="success"
+    :reset-after="2400"
+    @confirm="publishFieldLog()"
+  />
+</template>`,
   'animated-mobile-numeric-keypad': `<script setup lang="ts">
 const amount = ref('')
 </script>

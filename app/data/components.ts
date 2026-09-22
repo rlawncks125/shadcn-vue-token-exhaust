@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-slide-to-confirm', name: 'Animated Slide to Confirm', category: 'buttons', status: 'Ready', updated: '2026.09.22',
+    description: 'A mobile slide confirmation control with drag resistance, threshold commit, keyboard slider semantics, loading state, and optional reset and haptic feedback.',
+    tags: ['slide', 'confirm', 'mobile'],
+    props: [
+      { name: 'modelValue / label / confirmedLabel', type: 'boolean / string', default: 'false / Slide to confirm / Confirmed', description: 'Controlled result and accessible state copy.' },
+      { name: 'threshold / duration / resetAfter', type: 'number', default: '0.82 / 260 / 0', description: 'Commit distance, snap motion, and optional automatic reset.' },
+      { name: 'tone / haptic / loading / disabled', type: 'string / boolean', default: 'dark / false / false / false', description: 'Semantic styling, feedback, and interaction states.' },
+      { name: 'progress / confirm / reset', type: 'events', default: '-', description: 'Reports drag progress and confirmation lifecycle.' },
+      { name: 'confirm / reset / setProgress / focus / recalculate', type: 'exposed methods', default: '-', description: 'Programmatic state, focus, and geometry controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-numeric-keypad', name: 'Animated Mobile Numeric Keypad', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A touch-first numeric keypad for amounts, quantities, and PINs with masking, decimal rules, physical keyboard input, and optional haptic feedback.',
     tags: ['keypad', 'numeric', 'mobile'],

@@ -453,6 +453,13 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const slideConfirmThreshold = ref(0.82)
+const slideConfirmDuration = ref(260)
+const slideConfirmResetAfter = ref(0)
+const slideConfirmTone = ref<'dark' | 'success' | 'danger'>('success')
+const slideConfirmHaptic = ref(false)
+const slideConfirmLoading = ref(false)
+const slideConfirmDisabled = ref(false)
 const keypadMode = ref<'numeric' | 'decimal' | 'pin'>('decimal')
 const keypadMaxLength = ref(8)
 const keypadMasked = ref(false)
@@ -559,6 +566,13 @@ async function copyExample() {
 }
 
 function resetControls() {
+  slideConfirmThreshold.value = 0.82
+  slideConfirmDuration.value = 260
+  slideConfirmResetAfter.value = 0
+  slideConfirmTone.value = 'success'
+  slideConfirmHaptic.value = false
+  slideConfirmLoading.value = false
+  slideConfirmDisabled.value = false
   keypadMode.value = 'decimal'
   keypadMaxLength.value = 8
   keypadMasked.value = false
@@ -1135,7 +1149,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileNumericKeypadPreview v-if="item.slug === 'animated-mobile-numeric-keypad'" :mode="keypadMode" :max-length="keypadMaxLength" :masked="keypadMasked" :show-submit="keypadShowSubmit" :auto-submit="keypadAutoSubmit" :haptic="keypadHaptic" :duration="keypadDuration" :disabled="keypadDisabled" />
+            <LazyPreviewsAnimatedSlideToConfirmPreview v-if="item.slug === 'animated-slide-to-confirm'" :threshold="slideConfirmThreshold" :duration="slideConfirmDuration" :reset-after="slideConfirmResetAfter" :tone="slideConfirmTone" :haptic="slideConfirmHaptic" :loading="slideConfirmLoading" :disabled="slideConfirmDisabled" />
+            <LazyPreviewsAnimatedMobileNumericKeypadPreview v-else-if="item.slug === 'animated-mobile-numeric-keypad'" :mode="keypadMode" :max-length="keypadMaxLength" :masked="keypadMasked" :show-submit="keypadShowSubmit" :auto-submit="keypadAutoSubmit" :haptic="keypadHaptic" :duration="keypadDuration" :disabled="keypadDisabled" />
             <LazyPreviewsAnimatedMobileOnboardingPagerPreview v-else-if="item.slug === 'animated-mobile-onboarding-pager'" :duration="onboardingDuration" :swipe-threshold="onboardingSwipeThreshold" :swipe="onboardingSwipe" :show-skip="onboardingShowSkip" :show-back="onboardingShowBack" :show-progress="onboardingShowProgress" :safe-area="onboardingSafeArea" :disabled="onboardingDisabled" />
             <LazyPreviewsAnimatedMobileFilterBarPreview v-else-if="item.slug === 'animated-mobile-filter-bar'" :duration="mobileFilterDuration" :multiple="mobileFilterMultiple" :show-all="mobileFilterShowAll" :allow-empty="mobileFilterAllowEmpty" :disabled="mobileFilterDisabled" />
             <LazyPreviewsAnimatedMobileMiniPlayerPreview v-else-if="item.slug === 'animated-mobile-mini-player'" :duration="miniPlayerDuration" :safe-area="miniPlayerSafeArea" :show-close="miniPlayerShowClose" :disabled="miniPlayerDisabled" />
@@ -1293,6 +1308,16 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-slide-to-confirm'" class="space-y-5">
+              <label class="block text-xs">Commit threshold · {{ Math.round(slideConfirmThreshold * 100) }}%<input v-model.number="slideConfirmThreshold" type="range" min="0.5" max="1" step="0.02" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Snap duration · {{ slideConfirmDuration }}ms<input v-model.number="slideConfirmDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="block"><span class="mb-2 block text-xs">Automatic reset</span><select v-model.number="slideConfirmResetAfter" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option :value="0">Keep confirmed</option><option :value="1200">After 1.2s</option><option :value="2400">After 2.4s</option></select></label>
+              <label class="block"><span class="mb-2 block text-xs">Tone</span><select v-model="slideConfirmTone" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="dark">Dark</option><option value="success">Success</option><option value="danger">Danger</option></select></label>
+              <label class="flex items-center justify-between text-xs">Haptic feedback <input v-model="slideConfirmHaptic" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Loading <input v-model="slideConfirmLoading" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="slideConfirmDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Drag the handle beyond the threshold, or focus it and use Arrow keys, Home, End, Enter, or Space. A cancelled drag snaps safely back.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-numeric-keypad'" class="space-y-5">
               <label class="block"><span class="mb-2 block text-xs">Input mode</span><select v-model="keypadMode" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="numeric">Numeric</option><option value="decimal">Decimal</option><option value="pin">PIN</option></select></label>
               <label class="block text-xs">Maximum length · {{ keypadMaxLength }}<input v-model.number="keypadMaxLength" type="range" min="1" max="16" step="1" class="mt-3 w-full accent-black"></label>
