@@ -1,4 +1,24 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-filter-bar': `<script setup lang="ts">
+import type { AnimatedMobileFilterItem } from '@/components/animated-mobile-filter-bar/AnimatedMobileFilterBar.vue'
+
+const selected = ref<string[]>(['coast'])
+const filters: AnimatedMobileFilterItem[] = [
+  { id: 'coast', label: 'Coast', count: 8 },
+  { id: 'forest', label: 'Forest', count: 12 },
+  { id: 'city', label: 'City', count: 5 },
+  { id: 'private', label: 'Private', disabled: true },
+]
+</script>
+
+<template>
+  <AnimatedMobileFilterBar
+    v-model="selected"
+    :items="filters"
+    label="Filter field notes"
+    @change="value => loadNotes(value)"
+  />
+</template>`,
   'animated-mobile-mini-player': `<script setup lang="ts">
 import type { AnimatedMobileMiniPlayerTrack } from '@/components/animated-mobile-mini-player/AnimatedMobileMiniPlayer.vue'
 const open = ref(true)

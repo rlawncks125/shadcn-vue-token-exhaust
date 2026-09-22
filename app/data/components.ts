@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-filter-bar', name: 'Animated Mobile Filter Bar', category: 'navigation', status: 'Ready', updated: '2026.09.22',
+    description: 'A touch-first horizontal filter bar with multi-select chips, overflow affordances, automatic scrolling, and roving keyboard focus.',
+    tags: ['filter-bar', 'chips', 'mobile'],
+    props: [
+      { name: 'modelValue / items', type: 'string[] / AnimatedMobileFilterItem[]', default: '[] / required', description: 'Controlled selection and labeled filter options with optional counts, icons, and disabled state.' },
+      { name: 'multiple / showAll / allowEmpty', type: 'boolean', default: 'true / true / true', description: 'Selection mode, reset chip, and deselection behavior.' },
+      { name: 'label / allLabel / duration / disabled', type: 'string / number / boolean', default: 'Filter results / All / 220 / false', description: 'Accessible name, reset copy, motion timing, and global interaction state.' },
+      { name: 'change / scrollEdge', type: 'events', default: '-', description: 'Reports selection changes and horizontal overflow edges.' },
+      { name: 'select / reset / focus / scrollTo / recalculate', type: 'exposed methods', default: '-', description: 'Programmatic selection, navigation, scrolling, and edge measurement.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-mini-player', name: 'Animated Mobile Mini Player', category: 'data-display', status: 'Ready', updated: '2026.09.21',
     description: 'A controlled mobile mini player with playback controls, accessible seeking, safe-area placement, and compact track metadata.',
     tags: ['mini-player', 'mobile', 'media'],

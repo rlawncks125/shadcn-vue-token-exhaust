@@ -19,6 +19,7 @@ import type { AnimatedActionSheetAction } from '#registry/default/animated-actio
 import type { AnimatedSegmentedControlItem } from '#registry/default/animated-segmented-control/AnimatedSegmentedControl.vue'
 import type { AnimatedSelectionToolbarAction } from '#registry/default/animated-selection-toolbar/AnimatedSelectionToolbar.vue'
 import type { AnimatedMobileMiniPlayerTrack } from '#registry/default/animated-mobile-mini-player/AnimatedMobileMiniPlayer.vue'
+import type { AnimatedMobileFilterItem } from '#registry/default/animated-mobile-filter-bar/AnimatedMobileFilterBar.vue'
 
 const AnimatedEditableTable = defineAsyncComponent(() => import('#registry/default/animated-editable-table/AnimatedEditableTable.vue'))
 const AnimatedKanbanBoard = defineAsyncComponent(() => import('#registry/default/animated-kanban-board/AnimatedKanbanBoard.vue'))
@@ -35,6 +36,7 @@ const AnimatedSwipeSnackbar = defineAsyncComponent(() => import('#registry/defau
 const AnimatedMobileComposer = defineAsyncComponent(() => import('#registry/default/animated-mobile-composer/AnimatedMobileComposer.vue'))
 const AnimatedSelectionToolbar = defineAsyncComponent(() => import('#registry/default/animated-selection-toolbar/AnimatedSelectionToolbar.vue'))
 const AnimatedMobileMiniPlayer = defineAsyncComponent(() => import('#registry/default/animated-mobile-mini-player/AnimatedMobileMiniPlayer.vue'))
+const AnimatedMobileFilterBar = defineAsyncComponent(() => import('#registry/default/animated-mobile-filter-bar/AnimatedMobileFilterBar.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -103,6 +105,8 @@ const miniPlayerOpen = ref(false)
 const miniPlayerPlaying = ref(false)
 const miniPlayerProgress = ref(0.28)
 const miniPlayerTrack: AnimatedMobileMiniPlayerTrack = { id: 'coast', title: 'Atlantic weather', artist: 'Field Recordings', duration: 248 }
+const mobileFilters: AnimatedMobileFilterItem[] = [{ id: 'coast', label: 'Coast', count: 8 }, { id: 'forest', label: 'Forest', count: 12 }, { id: 'city', label: 'City', count: 5 }, { id: 'night', label: 'Night', count: 3 }]
+const selectedMobileFilters = ref<string[]>(['coast'])
 
 function latestArtwork(label: string, background: string, accent: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="${background}"/><circle cx="620" cy="130" r="180" fill="${accent}"/><path d="M0 470 180 280l140 130 130-210 210 260 140-125v265H0Z" fill="#f5efdc" fill-opacity=".75"/><text x="42" y="62" fill="#fff" font-family="sans-serif" font-size="22" font-weight="700" letter-spacing="5">${label}</text></svg>`
@@ -119,7 +123,13 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-mini-player'" class="mx-auto flex min-h-[300px] w-full max-w-[460px] items-center justify-center rounded-[22px] bg-[#e7e2d4] p-4">
+    <div v-if="slug === 'animated-mobile-filter-bar'" class="mx-auto min-h-[300px] w-full max-w-[460px] overflow-hidden rounded-[22px] bg-[#e7e2d4] p-4" style="--filter-edge: #e7e2d4">
+      <p class="mb-5 mt-3 text-2xl font-semibold tracking-[-.05em]">Sort the landscape.</p>
+      <AnimatedMobileFilterBar v-model="selectedMobileFilters" :items="mobileFilters" :duration="180" label="Filter field notes" />
+      <div class="mt-5 grid grid-cols-3 gap-2"><span v-for="index in 3" :key="index" class="h-28 rounded-[16px]" :class="index === 1 ? 'bg-[#de7450]' : index === 2 ? 'bg-[#648675]' : 'bg-[#e4bd54]'" /></div>
+    </div>
+
+    <div v-else-if="slug === 'animated-mobile-mini-player'" class="mx-auto flex min-h-[300px] w-full max-w-[460px] items-center justify-center rounded-[22px] bg-[#e7e2d4] p-4">
       <button type="button" class="rounded-[18px] bg-[#1c1e1a] px-5 py-4 text-xs font-semibold text-white" @click="miniPlayerOpen = true">Play Atlantic weather</button>
       <AnimatedMobileMiniPlayer v-model="miniPlayerPlaying" v-model:open="miniPlayerOpen" v-model:progress="miniPlayerProgress" :track="miniPlayerTrack" :duration="180" :safe-area="false" />
     </div>

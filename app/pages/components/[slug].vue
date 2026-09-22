@@ -453,6 +453,11 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const mobileFilterDuration = ref(220)
+const mobileFilterMultiple = ref(true)
+const mobileFilterShowAll = ref(true)
+const mobileFilterAllowEmpty = ref(true)
+const mobileFilterDisabled = ref(false)
 const miniPlayerDuration = ref(260)
 const miniPlayerSafeArea = ref(true)
 const miniPlayerShowClose = ref(true)
@@ -538,6 +543,11 @@ async function copyExample() {
 }
 
 function resetControls() {
+  mobileFilterDuration.value = 220
+  mobileFilterMultiple.value = true
+  mobileFilterShowAll.value = true
+  mobileFilterAllowEmpty.value = true
+  mobileFilterDisabled.value = false
   miniPlayerDuration.value = 260
   miniPlayerSafeArea.value = true
   miniPlayerShowClose.value = true
@@ -1093,7 +1103,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileMiniPlayerPreview v-if="item.slug === 'animated-mobile-mini-player'" :duration="miniPlayerDuration" :safe-area="miniPlayerSafeArea" :show-close="miniPlayerShowClose" :disabled="miniPlayerDisabled" />
+            <LazyPreviewsAnimatedMobileFilterBarPreview v-if="item.slug === 'animated-mobile-filter-bar'" :duration="mobileFilterDuration" :multiple="mobileFilterMultiple" :show-all="mobileFilterShowAll" :allow-empty="mobileFilterAllowEmpty" :disabled="mobileFilterDisabled" />
+            <LazyPreviewsAnimatedMobileMiniPlayerPreview v-else-if="item.slug === 'animated-mobile-mini-player'" :duration="miniPlayerDuration" :safe-area="miniPlayerSafeArea" :show-close="miniPlayerShowClose" :disabled="miniPlayerDisabled" />
             <LazyPreviewsAnimatedSelectionToolbarPreview v-else-if="item.slug === 'animated-selection-toolbar'" :duration="selectionToolbarDuration" :clearable="selectionToolbarClearable" :safe-area="selectionToolbarSafeArea" :disabled="selectionToolbarDisabled" />
             <LazyPreviewsAnimatedMobileComposerPreview v-else-if="item.slug === 'animated-mobile-composer'" :max-length="composerMaxLength" :max-rows="composerMaxRows" :duration="composerDuration" :submit-on-enter="composerSubmitOnEnter" :allow-attachment="composerAllowAttachment" :safe-area="composerSafeArea" :disabled="composerDisabled" :loading="composerLoading" />
             <LazyPreviewsAnimatedSwipeSnackbarPreview v-else-if="item.slug === 'animated-swipe-snackbar'" :tone="snackbarTone" :timeout="snackbarTimeout" :duration="snackbarDuration" :swipe-threshold="snackbarSwipeThreshold" :close-on-action="snackbarCloseOnAction" :safe-area="snackbarSafeArea" :disabled="snackbarDisabled" />
@@ -1248,6 +1259,14 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-filter-bar'" class="space-y-5">
+              <label class="block text-xs">Transition duration · {{ mobileFilterDuration }}ms<input v-model.number="mobileFilterDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Multiple selection <input v-model="mobileFilterMultiple" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">All filter <input v-model="mobileFilterShowAll" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Allow empty selection <input v-model="mobileFilterAllowEmpty" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="mobileFilterDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Swipe horizontally on touch, tap chips to filter, or use Arrow keys, Home, and End. Edge fades indicate more options without adding small arrow controls.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-mini-player'" class="space-y-5">
               <label class="block text-xs">Transition duration · {{ miniPlayerDuration }}ms<input v-model.number="miniPlayerDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
               <label class="flex items-center justify-between text-xs">Safe-area inset <input v-model="miniPlayerSafeArea" type="checkbox" class="accent-black"></label>

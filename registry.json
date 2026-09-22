@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-filter-bar", "type": "registry:component", "title": "Animated Mobile Filter Bar",
+      "description": "A touch-first horizontal filter bar with multi-select chips, overflow affordances, automatic scrolling, and roving keyboard focus.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-filter-bar/AnimatedMobileFilterBar.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-mini-player", "type": "registry:component", "title": "Animated Mobile Mini Player",
       "description": "A controlled mobile mini player with playback controls, accessible seeking, safe-area placement, and compact track metadata.",
       "categories": ["media", "mobile", "animation", "interactive"],
