@@ -50,6 +50,17 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-file-export', name: 'Animated Mobile File Export', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional File System Access export card with writable-stream saving, cancellation handling, file metadata, and Blob download fallback.', tags: ['file', 'export', 'web-api'],
+    props: [
+      { name: 'content', type: 'string | Blob', default: 'required', description: 'Data written to the selected file or download.' },
+      { name: 'filename / mimeType / extension', type: 'string', default: 'export.txt / text/plain / .txt', description: 'Suggested file identity and picker type.' },
+      { name: 'fallbackDownload', type: 'boolean', default: 'true', description: 'Uses a Blob download when showSaveFilePicker is unavailable.' },
+      { name: 'title / description / saveLabel', type: 'string', default: 'Export defaults', description: 'Visible context and action copy.' },
+      { name: 'saving / saved / download / cancel / unsupported / error', type: 'events', default: '-', description: 'Reports the file export lifecycle.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-bluetooth-pairing', name: 'Animated Mobile Bluetooth Pairing', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A functional Web Bluetooth control with device filtering, native picker, GATT connect and reconnect, disconnect events, and unsupported fallback.', tags: ['bluetooth', 'gatt', 'web-api'],
     props: [

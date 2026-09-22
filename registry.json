@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-file-export", "type": "registry:component", "title": "Animated Mobile File Export",
+      "description": "A functional File System Access export card with writable-stream saving, cancellation handling, file metadata, and Blob download fallback.",
+      "categories": ["forms", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-file-export/AnimatedMobileFileExport.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-bluetooth-pairing", "type": "registry:component", "title": "Animated Mobile Bluetooth Pairing",
       "description": "A functional Web Bluetooth control with device filtering, native picker, GATT connect and reconnect, disconnect events, and unsupported fallback.",
       "categories": ["forms", "mobile", "web-api", "interactive"],

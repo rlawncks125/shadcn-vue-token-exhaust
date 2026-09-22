@@ -454,6 +454,9 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const fileExportFallback = ref(true)
+const fileExportDuration = ref(260)
+const fileExportDisabled = ref(false)
 const bluetoothNamePrefix = ref('')
 const bluetoothService = ref('')
 const bluetoothAutoConnect = ref(true)
@@ -616,6 +619,9 @@ async function copyExample() {
 }
 
 function resetControls() {
+  fileExportFallback.value = true
+  fileExportDuration.value = 260
+  fileExportDisabled.value = false
   bluetoothNamePrefix.value = ''
   bluetoothService.value = ''
   bluetoothAutoConnect.value = true
@@ -1250,7 +1256,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileBluetoothPairingPreview v-if="item.slug === 'animated-mobile-bluetooth-pairing'" :name-prefix="bluetoothNamePrefix" :service="bluetoothService" :auto-connect="bluetoothAutoConnect" :disconnect-on-unmount="bluetoothDisconnectOnUnmount" :duration="bluetoothDuration" :disabled="bluetoothDisabled" />
+            <LazyPreviewsAnimatedMobileFileExportPreview v-if="item.slug === 'animated-mobile-file-export'" :fallback-download="fileExportFallback" :duration="fileExportDuration" :disabled="fileExportDisabled" />
+            <LazyPreviewsAnimatedMobileBluetoothPairingPreview v-else-if="item.slug === 'animated-mobile-bluetooth-pairing'" :name-prefix="bluetoothNamePrefix" :service="bluetoothService" :auto-connect="bluetoothAutoConnect" :disconnect-on-unmount="bluetoothDisconnectOnUnmount" :duration="bluetoothDuration" :disabled="bluetoothDisabled" />
             <LazyPreviewsAnimatedMobileNativeSharePreview v-else-if="item.slug === 'animated-mobile-native-share'" :fallback="nativeShareFallback" :duration="nativeShareDuration" :disabled="nativeShareDisabled" />
             <LazyPreviewsAnimatedMobileInstallPromptPreview v-else-if="item.slug === 'animated-mobile-install-prompt'" :auto-show="installPromptAutoShow" :close-on-choice="installPromptCloseOnChoice" :dismissible="installPromptDismissible" :duration="installPromptDuration" :disabled="installPromptDisabled" />
             <LazyPreviewsAnimatedMobileContactPickerPreview v-else-if="item.slug === 'animated-mobile-contact-picker'" :multiple="contactPickerMultiple" :duration="contactPickerDuration" :disabled="contactPickerDisabled" />
@@ -1419,6 +1426,12 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-file-export'" class="space-y-5">
+              <label class="flex items-center justify-between text-xs">Download fallback <input v-model="fileExportFallback" type="checkbox" class="accent-black"></label>
+              <label class="block text-xs">Status duration · {{ fileExportDuration }}ms<input v-model.number="fileExportDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="fileExportDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Supported browsers use showSaveFilePicker and a writable stream. Other browsers receive the same Blob through a standard download.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-bluetooth-pairing'" class="space-y-5">
               <label class="block"><span class="mb-2 block text-xs">Name prefix · empty shows all BLE devices</span><Input v-model="bluetoothNamePrefix" placeholder="Optional, e.g. FIELD-" /></label>
               <label class="block"><span class="mb-2 block text-xs">Required service UUID</span><Input v-model="bluetoothService" placeholder="Optional UUID or standard service name" /></label>

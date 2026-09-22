@@ -1,4 +1,17 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-file-export': `<script setup lang="ts">
+const csv = 'time,latitude,longitude\\n08:30,37.7749,-122.4194'
+</script>
+
+<template>
+  <AnimatedMobileFileExport
+    :content="csv"
+    filename="route-log.csv"
+    mime-type="text/csv"
+    extension=".csv"
+    @saved="name => trackExport(name)"
+  />
+</template>`,
   'animated-mobile-bluetooth-pairing': `<template>
   <AnimatedMobileBluetoothPairing
     name-prefix="FIELD-"
