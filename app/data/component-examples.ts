@@ -1,4 +1,19 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-numeric-keypad': `<script setup lang="ts">
+const amount = ref('')
+</script>
+
+<template>
+  <AnimatedMobileNumericKeypad
+    v-model="amount"
+    mode="decimal"
+    label="Transfer amount"
+    placeholder="0.00"
+    :max-length="8"
+    submit-label="Continue"
+    @submit="value => createTransfer(value)"
+  />
+</template>`,
   'animated-mobile-onboarding-pager': `<script setup lang="ts">
 import type { AnimatedMobileOnboardingStep } from '@/components/animated-mobile-onboarding-pager/AnimatedMobileOnboardingPager.vue'
 

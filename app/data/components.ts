@@ -50,6 +50,19 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-numeric-keypad', name: 'Animated Mobile Numeric Keypad', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A touch-first numeric keypad for amounts, quantities, and PINs with masking, decimal rules, physical keyboard input, and optional haptic feedback.',
+    tags: ['keypad', 'numeric', 'mobile'],
+    props: [
+      { name: 'modelValue / mode', type: "string / 'numeric' | 'decimal' | 'pin'", default: "'' / numeric", description: 'Controlled input and validation behavior.' },
+      { name: 'maxLength / decimalSeparator / masked', type: "number / '.' | ',' / boolean", default: '8 / . / false', description: 'Input bounds, locale separator, and private display.' },
+      { name: 'showSubmit / autoSubmit / clearOnSubmit / haptic', type: 'boolean', default: 'true / false / false / false', description: 'Completion controls and mobile feedback.' },
+      { name: 'duration / disabled / labels', type: 'number / boolean / string', default: '140 / false / localized defaults', description: 'Press motion, interaction state, and accessible copy.' },
+      { name: 'input / delete / clear / submit / complete', type: 'events', default: '-', description: 'Reports editing and completion lifecycle.' },
+      { name: 'press / backspace / clear / submit / focus', type: 'exposed methods', default: '-', description: 'Programmatic keypad input and focus.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-onboarding-pager', name: 'Animated Mobile Onboarding Pager', category: 'navigation', status: 'Ready', updated: '2026.09.22',
     description: 'A controlled mobile onboarding carousel with horizontal swipe, progress controls, skip and completion actions, keyboard navigation, and safe-area support.',
     tags: ['onboarding', 'pager', 'mobile'],

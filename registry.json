@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-numeric-keypad", "type": "registry:component", "title": "Animated Mobile Numeric Keypad",
+      "description": "A touch-first numeric keypad for amounts, quantities, and PINs with masking, decimal rules, physical keyboard input, and optional haptic feedback.",
+      "categories": ["forms", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-numeric-keypad/AnimatedMobileNumericKeypad.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-onboarding-pager", "type": "registry:component", "title": "Animated Mobile Onboarding Pager",
       "description": "A controlled mobile onboarding carousel with horizontal swipe, progress controls, skip and completion actions, keyboard navigation, and safe-area support.",
       "categories": ["navigation", "mobile", "animation", "interactive"],

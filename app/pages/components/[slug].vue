@@ -453,6 +453,14 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const keypadMode = ref<'numeric' | 'decimal' | 'pin'>('decimal')
+const keypadMaxLength = ref(8)
+const keypadMasked = ref(false)
+const keypadShowSubmit = ref(true)
+const keypadAutoSubmit = ref(false)
+const keypadHaptic = ref(false)
+const keypadDuration = ref(140)
+const keypadDisabled = ref(false)
 const onboardingDuration = ref(320)
 const onboardingSwipeThreshold = ref(72)
 const onboardingSwipe = ref(true)
@@ -551,6 +559,14 @@ async function copyExample() {
 }
 
 function resetControls() {
+  keypadMode.value = 'decimal'
+  keypadMaxLength.value = 8
+  keypadMasked.value = false
+  keypadShowSubmit.value = true
+  keypadAutoSubmit.value = false
+  keypadHaptic.value = false
+  keypadDuration.value = 140
+  keypadDisabled.value = false
   onboardingDuration.value = 320
   onboardingSwipeThreshold.value = 72
   onboardingSwipe.value = true
@@ -1119,7 +1135,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileOnboardingPagerPreview v-if="item.slug === 'animated-mobile-onboarding-pager'" :duration="onboardingDuration" :swipe-threshold="onboardingSwipeThreshold" :swipe="onboardingSwipe" :show-skip="onboardingShowSkip" :show-back="onboardingShowBack" :show-progress="onboardingShowProgress" :safe-area="onboardingSafeArea" :disabled="onboardingDisabled" />
+            <LazyPreviewsAnimatedMobileNumericKeypadPreview v-if="item.slug === 'animated-mobile-numeric-keypad'" :mode="keypadMode" :max-length="keypadMaxLength" :masked="keypadMasked" :show-submit="keypadShowSubmit" :auto-submit="keypadAutoSubmit" :haptic="keypadHaptic" :duration="keypadDuration" :disabled="keypadDisabled" />
+            <LazyPreviewsAnimatedMobileOnboardingPagerPreview v-else-if="item.slug === 'animated-mobile-onboarding-pager'" :duration="onboardingDuration" :swipe-threshold="onboardingSwipeThreshold" :swipe="onboardingSwipe" :show-skip="onboardingShowSkip" :show-back="onboardingShowBack" :show-progress="onboardingShowProgress" :safe-area="onboardingSafeArea" :disabled="onboardingDisabled" />
             <LazyPreviewsAnimatedMobileFilterBarPreview v-else-if="item.slug === 'animated-mobile-filter-bar'" :duration="mobileFilterDuration" :multiple="mobileFilterMultiple" :show-all="mobileFilterShowAll" :allow-empty="mobileFilterAllowEmpty" :disabled="mobileFilterDisabled" />
             <LazyPreviewsAnimatedMobileMiniPlayerPreview v-else-if="item.slug === 'animated-mobile-mini-player'" :duration="miniPlayerDuration" :safe-area="miniPlayerSafeArea" :show-close="miniPlayerShowClose" :disabled="miniPlayerDisabled" />
             <LazyPreviewsAnimatedSelectionToolbarPreview v-else-if="item.slug === 'animated-selection-toolbar'" :duration="selectionToolbarDuration" :clearable="selectionToolbarClearable" :safe-area="selectionToolbarSafeArea" :disabled="selectionToolbarDisabled" />
@@ -1276,6 +1293,17 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-numeric-keypad'" class="space-y-5">
+              <label class="block"><span class="mb-2 block text-xs">Input mode</span><select v-model="keypadMode" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="numeric">Numeric</option><option value="decimal">Decimal</option><option value="pin">PIN</option></select></label>
+              <label class="block text-xs">Maximum length · {{ keypadMaxLength }}<input v-model.number="keypadMaxLength" type="range" min="1" max="16" step="1" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Press duration · {{ keypadDuration }}ms<input v-model.number="keypadDuration" type="range" min="0" max="600" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Masked display <input v-model="keypadMasked" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Submit action <input v-model="keypadShowSubmit" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Auto-submit at limit <input v-model="keypadAutoSubmit" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Haptic feedback <input v-model="keypadHaptic" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="keypadDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Tap the large keys or focus the keypad and type digits. Backspace edits, Delete or Escape clears, and Enter submits.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-onboarding-pager'" class="space-y-5">
               <label class="block text-xs">Transition duration · {{ onboardingDuration }}ms<input v-model.number="onboardingDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
               <label class="block text-xs">Swipe threshold · {{ onboardingSwipeThreshold }}px<input v-model.number="onboardingSwipeThreshold" type="range" min="24" max="180" step="4" class="mt-3 w-full accent-black"></label>
