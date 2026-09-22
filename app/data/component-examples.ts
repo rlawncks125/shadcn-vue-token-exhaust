@@ -1,4 +1,23 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-onboarding-pager': `<script setup lang="ts">
+import type { AnimatedMobileOnboardingStep } from '@/components/animated-mobile-onboarding-pager/AnimatedMobileOnboardingPager.vue'
+
+const active = ref('collect')
+const steps: AnimatedMobileOnboardingStep[] = [
+  { id: 'collect', title: 'Collect field notes', description: 'Save details before they disappear.', icon: '01', accent: '#d9ff57' },
+  { id: 'connect', title: 'Connect the archive', description: 'Find useful threads between observations.', icon: '02', accent: '#e4633f' },
+  { id: 'carry', title: 'Take it offline', description: 'Keep the essentials close without a signal.', icon: '03', accent: '#83b9ac' },
+]
+</script>
+
+<template>
+  <AnimatedMobileOnboardingPager
+    v-model="active"
+    :steps="steps"
+    @skip="closeOnboarding()"
+    @complete="finishOnboarding()"
+  />
+</template>`,
   'animated-mobile-filter-bar': `<script setup lang="ts">
 import type { AnimatedMobileFilterItem } from '@/components/animated-mobile-filter-bar/AnimatedMobileFilterBar.vue'
 

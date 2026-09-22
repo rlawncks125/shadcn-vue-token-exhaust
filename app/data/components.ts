@@ -50,6 +50,19 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-onboarding-pager', name: 'Animated Mobile Onboarding Pager', category: 'navigation', status: 'Ready', updated: '2026.09.22',
+    description: 'A controlled mobile onboarding carousel with horizontal swipe, progress controls, skip and completion actions, keyboard navigation, and safe-area support.',
+    tags: ['onboarding', 'pager', 'mobile'],
+    props: [
+      { name: 'modelValue / steps', type: 'string / AnimatedMobileOnboardingStep[]', default: "'' / required", description: 'Controlled active step and onboarding content.' },
+      { name: 'swipe / swipeThreshold / loop', type: 'boolean / number / boolean', default: 'true / 72 / false', description: 'Horizontal gesture behavior, commit distance, and wrapping.' },
+      { name: 'showBack / showSkip / showProgress / safeArea', type: 'boolean', default: 'true', description: 'Navigation controls, progress dots, and device inset.' },
+      { name: 'duration / disabled / labels', type: 'number / boolean / string', default: '320 / false / localized defaults', description: 'Motion, interaction state, and action copy.' },
+      { name: 'change / complete / skip', type: 'events', default: '-', description: 'Reports step changes and onboarding outcomes.' },
+      { name: 'next / previous / goTo / complete / skip / focus', type: 'exposed methods', default: '-', description: 'Programmatic navigation, outcomes, and focus.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-filter-bar', name: 'Animated Mobile Filter Bar', category: 'navigation', status: 'Ready', updated: '2026.09.22',
     description: 'A touch-first horizontal filter bar with multi-select chips, overflow affordances, automatic scrolling, and roving keyboard focus.',
     tags: ['filter-bar', 'chips', 'mobile'],

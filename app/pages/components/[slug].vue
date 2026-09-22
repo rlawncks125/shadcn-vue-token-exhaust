@@ -453,6 +453,14 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const onboardingDuration = ref(320)
+const onboardingSwipeThreshold = ref(72)
+const onboardingSwipe = ref(true)
+const onboardingShowSkip = ref(true)
+const onboardingShowBack = ref(true)
+const onboardingShowProgress = ref(true)
+const onboardingSafeArea = ref(true)
+const onboardingDisabled = ref(false)
 const mobileFilterDuration = ref(220)
 const mobileFilterMultiple = ref(true)
 const mobileFilterShowAll = ref(true)
@@ -543,6 +551,14 @@ async function copyExample() {
 }
 
 function resetControls() {
+  onboardingDuration.value = 320
+  onboardingSwipeThreshold.value = 72
+  onboardingSwipe.value = true
+  onboardingShowSkip.value = true
+  onboardingShowBack.value = true
+  onboardingShowProgress.value = true
+  onboardingSafeArea.value = true
+  onboardingDisabled.value = false
   mobileFilterDuration.value = 220
   mobileFilterMultiple.value = true
   mobileFilterShowAll.value = true
@@ -1103,7 +1119,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileFilterBarPreview v-if="item.slug === 'animated-mobile-filter-bar'" :duration="mobileFilterDuration" :multiple="mobileFilterMultiple" :show-all="mobileFilterShowAll" :allow-empty="mobileFilterAllowEmpty" :disabled="mobileFilterDisabled" />
+            <LazyPreviewsAnimatedMobileOnboardingPagerPreview v-if="item.slug === 'animated-mobile-onboarding-pager'" :duration="onboardingDuration" :swipe-threshold="onboardingSwipeThreshold" :swipe="onboardingSwipe" :show-skip="onboardingShowSkip" :show-back="onboardingShowBack" :show-progress="onboardingShowProgress" :safe-area="onboardingSafeArea" :disabled="onboardingDisabled" />
+            <LazyPreviewsAnimatedMobileFilterBarPreview v-else-if="item.slug === 'animated-mobile-filter-bar'" :duration="mobileFilterDuration" :multiple="mobileFilterMultiple" :show-all="mobileFilterShowAll" :allow-empty="mobileFilterAllowEmpty" :disabled="mobileFilterDisabled" />
             <LazyPreviewsAnimatedMobileMiniPlayerPreview v-else-if="item.slug === 'animated-mobile-mini-player'" :duration="miniPlayerDuration" :safe-area="miniPlayerSafeArea" :show-close="miniPlayerShowClose" :disabled="miniPlayerDisabled" />
             <LazyPreviewsAnimatedSelectionToolbarPreview v-else-if="item.slug === 'animated-selection-toolbar'" :duration="selectionToolbarDuration" :clearable="selectionToolbarClearable" :safe-area="selectionToolbarSafeArea" :disabled="selectionToolbarDisabled" />
             <LazyPreviewsAnimatedMobileComposerPreview v-else-if="item.slug === 'animated-mobile-composer'" :max-length="composerMaxLength" :max-rows="composerMaxRows" :duration="composerDuration" :submit-on-enter="composerSubmitOnEnter" :allow-attachment="composerAllowAttachment" :safe-area="composerSafeArea" :disabled="composerDisabled" :loading="composerLoading" />
@@ -1259,6 +1276,17 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-onboarding-pager'" class="space-y-5">
+              <label class="block text-xs">Transition duration · {{ onboardingDuration }}ms<input v-model.number="onboardingDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Swipe threshold · {{ onboardingSwipeThreshold }}px<input v-model.number="onboardingSwipeThreshold" type="range" min="24" max="180" step="4" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Swipe gesture <input v-model="onboardingSwipe" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Skip action <input v-model="onboardingShowSkip" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Back action <input v-model="onboardingShowBack" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Progress dots <input v-model="onboardingShowProgress" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Safe-area inset <input v-model="onboardingSafeArea" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="onboardingDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Swipe horizontally, use the action controls, select a progress dot, or press Arrow keys, Home, and End. Vertical page scrolling remains available.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-filter-bar'" class="space-y-5">
               <label class="block text-xs">Transition duration · {{ mobileFilterDuration }}ms<input v-model.number="mobileFilterDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
               <label class="flex items-center justify-between text-xs">Multiple selection <input v-model="mobileFilterMultiple" type="checkbox" class="accent-black"></label>

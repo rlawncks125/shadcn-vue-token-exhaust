@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-onboarding-pager", "type": "registry:component", "title": "Animated Mobile Onboarding Pager",
+      "description": "A controlled mobile onboarding carousel with horizontal swipe, progress controls, skip and completion actions, keyboard navigation, and safe-area support.",
+      "categories": ["navigation", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-onboarding-pager/AnimatedMobileOnboardingPager.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-filter-bar", "type": "registry:component", "title": "Animated Mobile Filter Bar",
       "description": "A touch-first horizontal filter bar with multi-select chips, overflow affordances, automatic scrolling, and roving keyboard focus.",
       "categories": ["navigation", "mobile", "animation", "interactive"],
