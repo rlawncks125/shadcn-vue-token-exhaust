@@ -50,6 +50,17 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-connectivity-bar', name: 'Animated Mobile Connectivity Bar', category: 'feedback', status: 'Ready', updated: '2026.09.22',
+    description: 'A safe-area-aware mobile network status bar with offline retry, reconnecting feedback, automatic online dismissal, and accessible announcements.', tags: ['connectivity', 'offline', 'mobile'],
+    props: [
+      { name: 'open / state', type: "boolean / 'online' | 'connecting' | 'offline'", default: 'true / offline', description: 'Controlled visibility and network state.' },
+      { name: 'onlineLabel / connectingLabel / offlineLabel / retryLabel', type: 'string', default: 'Status defaults', description: 'Localized lifecycle and action copy.' },
+      { name: 'autoHide / duration', type: 'number', default: '2400 / 240', description: 'Online dismissal delay and transition timing.' },
+      { name: 'fixed / safeArea / dismissible / disabled', type: 'boolean', default: 'true / true / true / false', description: 'Placement and interaction options.' },
+      { name: 'retry / dismiss / hidden', type: 'events', default: '-', description: 'Reports recovery and visibility actions.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-voice-recorder', name: 'Animated Mobile Voice Recorder', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A touch-first voice note controller with recording lifecycle, elapsed time, pause and resume, duration limits, haptic feedback, and accessible actions.', tags: ['voice', 'recorder', 'mobile'],
     props: [

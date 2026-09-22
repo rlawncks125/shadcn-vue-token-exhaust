@@ -1,4 +1,16 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-connectivity-bar': `<script setup lang="ts">
+const visible = ref(true)
+const network = ref<'online' | 'connecting' | 'offline'>('offline')
+</script>
+
+<template>
+  <AnimatedMobileConnectivityBar
+    v-model:open="visible"
+    :state="network"
+    @retry="reconnect()"
+  />
+</template>`,
   'animated-mobile-voice-recorder': `<script setup lang="ts">
 const recording = ref(false)
 const paused = ref(false)

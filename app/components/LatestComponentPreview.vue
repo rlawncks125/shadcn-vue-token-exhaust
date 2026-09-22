@@ -43,6 +43,7 @@ const AnimatedMobileNumericKeypad = defineAsyncComponent(() => import('#registry
 const AnimatedSlideToConfirm = defineAsyncComponent(() => import('#registry/default/animated-slide-to-confirm/AnimatedSlideToConfirm.vue'))
 const AnimatedMobileActionBar = defineAsyncComponent(() => import('#registry/default/animated-mobile-action-bar/AnimatedMobileActionBar.vue'))
 const AnimatedMobileVoiceRecorder = defineAsyncComponent(() => import('#registry/default/animated-mobile-voice-recorder/AnimatedMobileVoiceRecorder.vue'))
+const AnimatedMobileConnectivityBar = defineAsyncComponent(() => import('#registry/default/animated-mobile-connectivity-bar/AnimatedMobileConnectivityBar.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -120,6 +121,7 @@ const slideConfirmed = ref(false)
 const actionBarOpen = ref(true)
 const voiceRecording = ref(false)
 const voicePaused = ref(false)
+const connectivityOpen = ref(true)
 
 function latestArtwork(label: string, background: string, accent: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="${background}"/><circle cx="620" cy="130" r="180" fill="${accent}"/><path d="M0 470 180 280l140 130 130-210 210 260 140-125v265H0Z" fill="#f5efdc" fill-opacity=".75"/><text x="42" y="62" fill="#fff" font-family="sans-serif" font-size="22" font-weight="700" letter-spacing="5">${label}</text></svg>`
@@ -136,7 +138,11 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-voice-recorder'" class="mx-auto flex min-h-[300px] w-full max-w-[460px] flex-col justify-end rounded-[22px] bg-[#c8d2ca] p-4">
+    <div v-if="slug === 'animated-mobile-connectivity-bar'" class="mx-auto min-h-[300px] w-full max-w-[460px] rounded-[22px] bg-[#dad4c7] p-4">
+      <AnimatedMobileConnectivityBar v-model:open="connectivityOpen" state="offline" :fixed="false" :safe-area="false" :duration="180" />
+      <div class="mt-8 rounded-[18px] bg-white/50 p-4"><p class="text-[9px] font-bold uppercase tracking-[.18em] text-black/35">Offline notes</p><p class="mt-3 text-2xl font-semibold tracking-[-.05em]">North trail index.</p></div>
+    </div>
+    <div v-else-if="slug === 'animated-mobile-voice-recorder'" class="mx-auto flex min-h-[300px] w-full max-w-[460px] flex-col justify-end rounded-[22px] bg-[#c8d2ca] p-4">
       <div class="mb-8 max-w-[80%] rounded-[18px_18px_18px_5px] bg-white/75 px-4 py-3 text-xs">Capture the sound near the north marker.</div>
       <AnimatedMobileVoiceRecorder v-model:recording="voiceRecording" v-model:paused="voicePaused" :max-duration="90" :duration="180" />
     </div>

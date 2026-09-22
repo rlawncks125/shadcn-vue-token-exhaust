@@ -454,6 +454,11 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const connectivityState = ref<'online' | 'connecting' | 'offline'>('offline')
+const connectivityAutoHide = ref(2400)
+const connectivityDuration = ref(240)
+const connectivityDismissible = ref(true)
+const connectivityDisabled = ref(false)
 const voiceRecorderMaxDuration = ref(120)
 const voiceRecorderDuration = ref(220)
 const voiceRecorderHaptic = ref(false)
@@ -576,6 +581,11 @@ async function copyExample() {
 }
 
 function resetControls() {
+  connectivityState.value = 'offline'
+  connectivityAutoHide.value = 2400
+  connectivityDuration.value = 240
+  connectivityDismissible.value = true
+  connectivityDisabled.value = false
   voiceRecorderMaxDuration.value = 120
   voiceRecorderDuration.value = 220
   voiceRecorderHaptic.value = false
@@ -1170,7 +1180,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileVoiceRecorderPreview v-if="item.slug === 'animated-mobile-voice-recorder'" :max-duration="voiceRecorderMaxDuration" :duration="voiceRecorderDuration" :haptic="voiceRecorderHaptic" :disabled="voiceRecorderDisabled" />
+            <LazyPreviewsAnimatedMobileConnectivityBarPreview v-if="item.slug === 'animated-mobile-connectivity-bar'" :state="connectivityState" :auto-hide="connectivityAutoHide" :duration="connectivityDuration" :dismissible="connectivityDismissible" :disabled="connectivityDisabled" />
+            <LazyPreviewsAnimatedMobileVoiceRecorderPreview v-else-if="item.slug === 'animated-mobile-voice-recorder'" :max-duration="voiceRecorderMaxDuration" :duration="voiceRecorderDuration" :haptic="voiceRecorderHaptic" :disabled="voiceRecorderDisabled" />
             <LazyPreviewsAnimatedMobileActionBarPreview v-else-if="item.slug === 'animated-mobile-action-bar'" :duration="actionBarDuration" :safe-area="actionBarSafeArea" :show-close="actionBarShowClose" :loading="actionBarLoading" :disabled="actionBarDisabled" />
             <LazyPreviewsAnimatedSlideToConfirmPreview v-else-if="item.slug === 'animated-slide-to-confirm'" :threshold="slideConfirmThreshold" :duration="slideConfirmDuration" :reset-after="slideConfirmResetAfter" :tone="slideConfirmTone" :haptic="slideConfirmHaptic" :loading="slideConfirmLoading" :disabled="slideConfirmDisabled" />
             <LazyPreviewsAnimatedMobileNumericKeypadPreview v-else-if="item.slug === 'animated-mobile-numeric-keypad'" :mode="keypadMode" :max-length="keypadMaxLength" :masked="keypadMasked" :show-submit="keypadShowSubmit" :auto-submit="keypadAutoSubmit" :haptic="keypadHaptic" :duration="keypadDuration" :disabled="keypadDisabled" />
@@ -1331,6 +1342,14 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-connectivity-bar'" class="space-y-5">
+              <label class="block"><span class="mb-2 block text-xs">Network state</span><select v-model="connectivityState" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="offline">Offline</option><option value="connecting">Connecting</option><option value="online">Online</option></select></label>
+              <label class="block text-xs">Auto-hide online · {{ connectivityAutoHide }}ms<input v-model.number="connectivityAutoHide" type="range" min="0" max="6000" step="200" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Transition duration · {{ connectivityDuration }}ms<input v-model.number="connectivityDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Dismissible <input v-model="connectivityDismissible" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="connectivityDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Drive state from browser connectivity or your sync layer. Online confirmation can hide itself after a configurable delay.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-voice-recorder'" class="space-y-5">
               <label class="block text-xs">Maximum duration · {{ voiceRecorderMaxDuration }}s<input v-model.number="voiceRecorderMaxDuration" type="range" min="5" max="300" step="5" class="mt-3 w-full accent-black"></label>
               <label class="block text-xs">Transition duration · {{ voiceRecorderDuration }}ms<input v-model.number="voiceRecorderDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>

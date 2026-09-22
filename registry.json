@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-connectivity-bar", "type": "registry:component", "title": "Animated Mobile Connectivity Bar",
+      "description": "A safe-area-aware mobile network status bar with offline retry, reconnecting feedback, automatic online dismissal, and accessible announcements.",
+      "categories": ["feedback", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-connectivity-bar/AnimatedMobileConnectivityBar.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-voice-recorder", "type": "registry:component", "title": "Animated Mobile Voice Recorder",
       "description": "A touch-first voice note controller with recording lifecycle, elapsed time, pause and resume, duration limits, haptic feedback, and accessible actions.",
       "categories": ["media", "mobile", "animation", "interactive"],
