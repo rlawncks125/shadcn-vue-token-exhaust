@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-voice-recorder', name: 'Animated Mobile Voice Recorder', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A touch-first voice note controller with recording lifecycle, elapsed time, pause and resume, duration limits, haptic feedback, and accessible actions.', tags: ['voice', 'recorder', 'mobile'],
+    props: [
+      { name: 'recording / paused', type: 'boolean', default: 'false / false', description: 'Controlled recording and playback state.' },
+      { name: 'maxDuration / duration', type: 'number', default: '120 / 220', description: 'Recording limit in seconds and transition timing in milliseconds.' },
+      { name: 'label / pausedLabel / idleLabel', type: 'string', default: 'Voice note labels', description: 'Visible and accessible lifecycle copy.' },
+      { name: 'haptic / disabled', type: 'boolean', default: 'false / false', description: 'Optional tactile feedback and interaction state.' },
+      { name: 'start / pause / resume / cancel / send / tick / limit', type: 'events', default: '-', description: 'Reports the complete recording lifecycle.' },
+      { name: 'start / togglePause / cancel / send / focus', type: 'exposed methods', default: '-', description: 'Programmatic recording and focus controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-action-bar', name: 'Animated Mobile Action Bar', category: 'navigation', status: 'Ready', updated: '2026.09.22',
     description: 'A safe-area-aware mobile CTA bar with primary and secondary actions, loading state, optional dismissal, and fixed or inline placement.', tags: ['action-bar', 'cta', 'mobile'],
     props: [

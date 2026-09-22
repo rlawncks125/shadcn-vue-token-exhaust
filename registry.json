@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-voice-recorder", "type": "registry:component", "title": "Animated Mobile Voice Recorder",
+      "description": "A touch-first voice note controller with recording lifecycle, elapsed time, pause and resume, duration limits, haptic feedback, and accessible actions.",
+      "categories": ["media", "mobile", "animation", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-voice-recorder/AnimatedMobileVoiceRecorder.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-action-bar", "type": "registry:component", "title": "Animated Mobile Action Bar",
       "description": "A safe-area-aware mobile CTA bar with primary and secondary actions, loading state, optional dismissal, and fixed or inline placement.",
       "categories": ["navigation", "mobile", "animation", "interactive"],

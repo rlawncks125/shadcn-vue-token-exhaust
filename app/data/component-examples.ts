@@ -1,4 +1,21 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-voice-recorder': `<script setup lang="ts">
+const recording = ref(false)
+const paused = ref(false)
+</script>
+
+<template>
+  <AnimatedMobileVoiceRecorder
+    v-model:recording="recording"
+    v-model:paused="paused"
+    :max-duration="90"
+    @start="mediaRecorder.start()"
+    @pause="mediaRecorder.pause()"
+    @resume="mediaRecorder.resume()"
+    @cancel="discardVoiceNote()"
+    @send="seconds => sendVoiceNote(seconds)"
+  />
+</template>`,
   'animated-mobile-action-bar': `<script setup lang="ts">
 const open = ref(true)
 </script>

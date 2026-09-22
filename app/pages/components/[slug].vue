@@ -454,6 +454,10 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const voiceRecorderMaxDuration = ref(120)
+const voiceRecorderDuration = ref(220)
+const voiceRecorderHaptic = ref(false)
+const voiceRecorderDisabled = ref(false)
 const actionBarDuration = ref(260)
 const actionBarSafeArea = ref(true)
 const actionBarShowClose = ref(true)
@@ -572,6 +576,10 @@ async function copyExample() {
 }
 
 function resetControls() {
+  voiceRecorderMaxDuration.value = 120
+  voiceRecorderDuration.value = 220
+  voiceRecorderHaptic.value = false
+  voiceRecorderDisabled.value = false
   actionBarDuration.value = 260
   actionBarSafeArea.value = true
   actionBarShowClose.value = true
@@ -1162,7 +1170,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileActionBarPreview v-if="item.slug === 'animated-mobile-action-bar'" :duration="actionBarDuration" :safe-area="actionBarSafeArea" :show-close="actionBarShowClose" :loading="actionBarLoading" :disabled="actionBarDisabled" />
+            <LazyPreviewsAnimatedMobileVoiceRecorderPreview v-if="item.slug === 'animated-mobile-voice-recorder'" :max-duration="voiceRecorderMaxDuration" :duration="voiceRecorderDuration" :haptic="voiceRecorderHaptic" :disabled="voiceRecorderDisabled" />
+            <LazyPreviewsAnimatedMobileActionBarPreview v-else-if="item.slug === 'animated-mobile-action-bar'" :duration="actionBarDuration" :safe-area="actionBarSafeArea" :show-close="actionBarShowClose" :loading="actionBarLoading" :disabled="actionBarDisabled" />
             <LazyPreviewsAnimatedSlideToConfirmPreview v-else-if="item.slug === 'animated-slide-to-confirm'" :threshold="slideConfirmThreshold" :duration="slideConfirmDuration" :reset-after="slideConfirmResetAfter" :tone="slideConfirmTone" :haptic="slideConfirmHaptic" :loading="slideConfirmLoading" :disabled="slideConfirmDisabled" />
             <LazyPreviewsAnimatedMobileNumericKeypadPreview v-else-if="item.slug === 'animated-mobile-numeric-keypad'" :mode="keypadMode" :max-length="keypadMaxLength" :masked="keypadMasked" :show-submit="keypadShowSubmit" :auto-submit="keypadAutoSubmit" :haptic="keypadHaptic" :duration="keypadDuration" :disabled="keypadDisabled" />
             <LazyPreviewsAnimatedMobileOnboardingPagerPreview v-else-if="item.slug === 'animated-mobile-onboarding-pager'" :duration="onboardingDuration" :swipe-threshold="onboardingSwipeThreshold" :swipe="onboardingSwipe" :show-skip="onboardingShowSkip" :show-back="onboardingShowBack" :show-progress="onboardingShowProgress" :safe-area="onboardingSafeArea" :disabled="onboardingDisabled" />
@@ -1322,6 +1331,13 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-voice-recorder'" class="space-y-5">
+              <label class="block text-xs">Maximum duration · {{ voiceRecorderMaxDuration }}s<input v-model.number="voiceRecorderMaxDuration" type="range" min="5" max="300" step="5" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Transition duration · {{ voiceRecorderDuration }}ms<input v-model.number="voiceRecorderDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Haptic feedback <input v-model="voiceRecorderHaptic" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="voiceRecorderDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Connect lifecycle events to MediaRecorder. The UI keeps timing and controls separate from browser permission handling.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-action-bar'" class="space-y-5">
               <label class="block text-xs">Transition duration · {{ actionBarDuration }}ms<input v-model.number="actionBarDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
               <label class="flex items-center justify-between text-xs">Safe-area inset <input v-model="actionBarSafeArea" type="checkbox" class="accent-black"></label>
