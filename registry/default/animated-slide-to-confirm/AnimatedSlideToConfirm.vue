@@ -125,7 +125,13 @@ function onKeydown(event: KeyboardEvent) {
   else if (event.key === 'End' || event.key === 'Enter' || event.key === ' ') { event.preventDefault(); confirm() }
 }
 
-watch(() => props.modelValue, (value) => setProgress(value ? 1 : 0))
+watch(() => props.modelValue, (value) => {
+  if (!value && resetTimer) {
+    clearTimeout(resetTimer)
+    resetTimer = undefined
+  }
+  setProgress(value ? 1 : 0)
+})
 watch(() => props.loading, (value) => { if (value && !props.modelValue) setProgress(0) })
 
 onMounted(() => {
