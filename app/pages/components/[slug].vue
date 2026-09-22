@@ -460,6 +460,7 @@ const scannerAllowTorch = ref(true)
 const scannerAllowFlip = ref(true)
 const scannerAllowGallery = ref(true)
 const scannerDisabled = ref(false)
+const scannerManaged = ref(false)
 const compassHeading = ref(32)
 const compassTargetBearing = ref(118)
 const compassAccuracy = ref(6)
@@ -467,6 +468,7 @@ const compassArrivalThreshold = ref(8)
 const compassDuration = ref(420)
 const compassActive = ref(true)
 const compassDisabled = ref(false)
+const compassSensor = ref(false)
 const connectivityState = ref<'online' | 'connecting' | 'offline'>('offline')
 const connectivityAutoHide = ref(2400)
 const connectivityDuration = ref(240)
@@ -600,6 +602,7 @@ function resetControls() {
   scannerAllowFlip.value = true
   scannerAllowGallery.value = true
   scannerDisabled.value = false
+  scannerManaged.value = false
   compassHeading.value = 32
   compassTargetBearing.value = 118
   compassAccuracy.value = 6
@@ -607,6 +610,7 @@ function resetControls() {
   compassDuration.value = 420
   compassActive.value = true
   compassDisabled.value = false
+  compassSensor.value = false
   connectivityState.value = 'offline'
   connectivityAutoHide.value = 2400
   connectivityDuration.value = 240
@@ -1206,8 +1210,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileScannerPreview v-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" />
-            <LazyPreviewsAnimatedMobileCompassPreview v-else-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" />
+            <LazyPreviewsAnimatedMobileScannerPreview v-if="item.slug === 'animated-mobile-scanner'" :state="scannerState" :duration="scannerDuration" :allow-torch="scannerAllowTorch" :allow-flip="scannerAllowFlip" :allow-gallery="scannerAllowGallery" :disabled="scannerDisabled" :managed="scannerManaged" />
+            <LazyPreviewsAnimatedMobileCompassPreview v-else-if="item.slug === 'animated-mobile-compass'" :heading="compassHeading" :target-bearing="compassTargetBearing" :accuracy="compassAccuracy" :arrival-threshold="compassArrivalThreshold" :duration="compassDuration" :active="compassActive" :disabled="compassDisabled" :sensor="compassSensor" />
             <LazyPreviewsAnimatedMobileConnectivityBarPreview v-else-if="item.slug === 'animated-mobile-connectivity-bar'" :state="connectivityState" :auto-hide="connectivityAutoHide" :duration="connectivityDuration" :dismissible="connectivityDismissible" :disabled="connectivityDisabled" />
             <LazyPreviewsAnimatedMobileVoiceRecorderPreview v-else-if="item.slug === 'animated-mobile-voice-recorder'" :max-duration="voiceRecorderMaxDuration" :duration="voiceRecorderDuration" :haptic="voiceRecorderHaptic" :disabled="voiceRecorderDisabled" />
             <LazyPreviewsAnimatedMobileActionBarPreview v-else-if="item.slug === 'animated-mobile-action-bar'" :duration="actionBarDuration" :safe-area="actionBarSafeArea" :show-close="actionBarShowClose" :loading="actionBarLoading" :disabled="actionBarDisabled" />
@@ -1377,7 +1381,8 @@ useHead(() => ({
               <label class="flex items-center justify-between text-xs">Camera flip <input v-model="scannerAllowFlip" type="checkbox" class="accent-black"></label>
               <label class="flex items-center justify-between text-xs">Gallery input <input v-model="scannerAllowGallery" type="checkbox" class="accent-black"></label>
               <label class="flex items-center justify-between text-xs">Disabled <input v-model="scannerDisabled" type="checkbox" class="accent-black"></label>
-              <p class="text-xs leading-5 text-black/45">Place an application-owned video element in the camera slot. Permission, decoding, and stream cleanup stay outside the UI shell.</p>
+              <label class="flex items-center justify-between text-xs">Use real camera <input v-model="scannerManaged" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Managed mode requests camera permission, decodes with BarcodeDetector, flips cameras, and stops tracks on cleanup. Use the camera slot only for a custom pipeline.</p>
             </div>
             <div v-if="item.slug === 'animated-mobile-compass'" class="space-y-5">
               <label class="block text-xs">Device heading · {{ compassHeading }}°<input v-model.number="compassHeading" type="range" min="0" max="359" step="1" class="mt-3 w-full accent-black"></label>
@@ -1387,7 +1392,8 @@ useHead(() => ({
               <label class="block text-xs">Motion duration · {{ compassDuration }}ms<input v-model.number="compassDuration" type="range" min="0" max="1200" step="20" class="mt-3 w-full accent-black"></label>
               <label class="flex items-center justify-between text-xs">Active signal <input v-model="compassActive" type="checkbox" class="accent-black"></label>
               <label class="flex items-center justify-between text-xs">Disabled <input v-model="compassDisabled" type="checkbox" class="accent-black"></label>
-              <p class="text-xs leading-5 text-black/45">Feed heading from a permitted device-orientation source. The component calculates the shortest turn without requesting sensor access itself.</p>
+              <label class="flex items-center justify-between text-xs">Use device sensor <input v-model="compassSensor" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Sensor mode requests iOS permission when needed, listens to DeviceOrientation, and cleans up automatically. Disable it to provide a controlled heading.</p>
             </div>
             <div v-if="item.slug === 'animated-mobile-connectivity-bar'" class="space-y-5">
               <label class="block"><span class="mb-2 block text-xs">Network state</span><select v-model="connectivityState" class="h-9 w-full rounded-lg border border-black/10 bg-white/70 px-3 text-xs"><option value="offline">Offline</option><option value="connecting">Connecting</option><option value="online">Online</option></select></label>

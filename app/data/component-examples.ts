@@ -1,13 +1,14 @@
 export const componentExamples: Record<string, string> = {
   'animated-mobile-scanner': `<script setup lang="ts">
-const state = ref<'scanning' | 'paused' | 'success' | 'error'>('scanning')
 const torch = ref(false)
 </script>
 
 <template>
-  <AnimatedMobileScanner v-model:torch="torch" :state="state" @flip="switchCamera()" @gallery="chooseImage()">
-    <template #camera><video ref="camera" autoplay muted playsinline class="size-full object-cover" /></template>
-  </AnimatedMobileScanner>
+  <AnimatedMobileScanner
+    v-model:torch="torch"
+    @detected="(value, format) => handleCode(value, format)"
+    @camera-error="message => showCameraHelp(message)"
+  />
 </template>`,
   'animated-mobile-compass': `<script setup lang="ts">
 const heading = ref(0)
@@ -16,12 +17,12 @@ const targetBearing = ref(118)
 
 <template>
   <AnimatedMobileCompass
-    :heading="heading"
+    v-model:heading="heading"
     :target-bearing="targetBearing"
     target-label="North marker"
     distance="240 m"
     :accuracy="6"
-    @calibrate="requestCompassPermission()"
+    @sensor-error="message => showSensorHelp(message)"
   />
 </template>`,
   'animated-mobile-connectivity-bar': `<script setup lang="ts">

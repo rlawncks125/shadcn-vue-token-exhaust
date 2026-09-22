@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const props = withDefaults(defineProps<{
   heading?: number
@@ -11,6 +11,8 @@ const props = withDefaults(defineProps<{
   duration?: number
   active?: boolean
   disabled?: boolean
+  sensor?: boolean
+  autoStart?: boolean
 }>(), {
   heading: 0,
   targetBearing: 0,
@@ -21,10 +23,15 @@ const props = withDefaults(defineProps<{
   duration: 420,
   active: true,
   disabled: false,
+  sensor: true,
+  autoStart: true,
 })
-const emit = defineEmits<{ calibrate: [], select: [] }>()
+const emit = defineEmits<{ calibrate: [], select: [], 'update:heading': [heading: number], heading: [heading: number, accuracy?: number], 'sensor-start': [], 'sensor-stop': [], 'sensor-error': [message: string] }>()
 const calibrateButton = ref<HTMLButtonElement>()
-const normalizedHeading = computed(() => ((props.heading % 360) + 360) % 360)
+const sensorHeading = ref<number | null>(null)
+const sensorActive = ref(false)
+const currentHeading = computed(() => sensorHeading.value ?? props.heading)
+const normalizedHeading = computed(() => ((currentHeading.value % 360) + 360) % 360)
 const normalizedTarget = computed(() => ((props.targetBearing % 360) + 360) % 360)
 const delta = computed(() => ((normalizedTarget.value - normalizedHeading.value + 540) % 360) - 180)
 const safeDuration = computed(() => Number.isFinite(props.duration) ? Math.min(2000, Math.max(0, props.duration)) : 420)
@@ -32,16 +39,39 @@ const arrived = computed(() => Math.abs(delta.value) <= Math.max(0, props.arriva
 const cardinals = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 const headingLabel = computed(() => cardinals[Math.round(normalizedHeading.value / 45) % 8])
 const directionLabel = computed(() => arrived.value ? 'Straight ahead' : `${Math.abs(Math.round(delta.value))}° ${delta.value < 0 ? 'left' : 'right'}`)
-function calibrate() { if (props.disabled) return false; emit('calibrate'); return true }
+type OrientationEvent = DeviceOrientationEvent & { webkitCompassHeading?: number, webkitCompassAccuracy?: number }
+type OrientationConstructor = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<'granted' | 'denied'> }
+function onOrientation(event: DeviceOrientationEvent) {
+  const value = (event as OrientationEvent).webkitCompassHeading ?? (event.alpha == null ? null : 360 - event.alpha)
+  if (value == null || !Number.isFinite(value)) return
+  sensorHeading.value = ((value % 360) + 360) % 360
+  emit('update:heading', sensorHeading.value)
+  emit('heading', sensorHeading.value, (event as OrientationEvent).webkitCompassAccuracy)
+}
+async function startSensor() {
+  if (props.disabled || !props.sensor || typeof window === 'undefined' || !window.DeviceOrientationEvent) return false
+  try {
+    const constructor = window.DeviceOrientationEvent as OrientationConstructor
+    if (constructor.requestPermission && await constructor.requestPermission() !== 'granted') throw new Error('Orientation permission was denied.')
+    window.removeEventListener('deviceorientation', onOrientation)
+    window.addEventListener('deviceorientation', onOrientation)
+    sensorActive.value = true; emit('sensor-start'); return true
+  }
+  catch (error) { const message = error instanceof Error ? error.message : 'Orientation sensor is unavailable.'; emit('sensor-error', message); return false }
+}
+function stopSensor() { if (typeof window !== 'undefined') window.removeEventListener('deviceorientation', onOrientation); if (sensorActive.value) emit('sensor-stop'); sensorActive.value = false; sensorHeading.value = null }
+async function calibrate() { if (props.disabled) return false; emit('calibrate'); return props.sensor ? startSensor() : true }
 function select() { if (props.disabled) return false; emit('select'); return true }
-defineExpose({ calibrate, select, focus: () => calibrateButton.value?.focus(), delta })
+onMounted(() => { const constructor = typeof window !== 'undefined' ? window.DeviceOrientationEvent as OrientationConstructor | undefined : undefined; if (props.sensor && props.autoStart && constructor && !constructor.requestPermission) startSensor() })
+onBeforeUnmount(stopSensor)
+defineExpose({ calibrate, startSensor, stopSensor, select, focus: () => calibrateButton.value?.focus(), delta, sensorActive })
 </script>
 
 <template>
   <section data-testid="animated-mobile-compass" class="w-full rounded-[30px] bg-[#171a17] p-5 text-white" :style="{ '--compass-duration': `${safeDuration}ms` }" :aria-label="`Direction to ${targetLabel}: ${directionLabel}`">
     <div class="flex items-start justify-between gap-4">
       <div class="min-w-0"><p class="text-[9px] font-bold uppercase tracking-[.2em] text-white/35">Navigate to</p><h3 class="mt-2 truncate text-xl font-semibold">{{ targetLabel }}</h3></div>
-      <button ref="calibrateButton" type="button" data-testid="compass-calibrate" class="min-h-11 rounded-[14px] bg-white/8 px-3 text-[10px] font-semibold text-white/65 outline-none hover:not-disabled:bg-white/12 focus-visible:ring-2 focus-visible:ring-[#d9ff57] disabled:opacity-35" :disabled="disabled" @click="calibrate">Calibrate</button>
+      <button ref="calibrateButton" type="button" data-testid="compass-calibrate" class="min-h-11 rounded-[14px] bg-white/8 px-3 text-[10px] font-semibold text-white/65 outline-none hover:not-disabled:bg-white/12 focus-visible:ring-2 focus-visible:ring-[#d9ff57] disabled:opacity-35" :disabled="disabled" @click="calibrate">{{ sensorActive ? 'Sensor active' : 'Enable compass' }}</button>
     </div>
 
     <button type="button" data-testid="compass-dial" class="relative mx-auto mt-7 block aspect-square w-full max-w-[270px] rounded-full outline-none focus-visible:ring-2 focus-visible:ring-[#d9ff57] disabled:cursor-default" :disabled="disabled" :aria-label="`${targetLabel}, ${directionLabel}`" @click="select">

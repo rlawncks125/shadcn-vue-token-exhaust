@@ -39,13 +39,13 @@
     },
     {
       "name": "animated-mobile-scanner", "type": "registry:component", "title": "Animated Mobile Scanner",
-      "description": "A camera-ready mobile scanner shell with animated targeting, torch and camera controls, gallery input, and controlled scan result states.",
+      "description": "A functional mobile barcode scanner using getUserMedia and BarcodeDetector, with torch, camera flip, gallery decoding, and result states.",
       "categories": ["forms", "mobile", "animation", "interactive"],
       "files": [{ "path": "registry/default/animated-mobile-scanner/AnimatedMobileScanner.vue", "type": "registry:component" }]
     },
     {
       "name": "animated-mobile-compass", "type": "registry:component", "title": "Animated Mobile Compass",
-      "description": "A sensor-ready mobile compass with controlled heading, target bearing, shortest-turn guidance, distance, accuracy, and calibration actions.",
+      "description": "A functional DeviceOrientation compass with target bearing, shortest-turn guidance, distance, accuracy, and permission handling.",
       "categories": ["navigation", "mobile", "animation", "interactive"],
       "files": [{ "path": "registry/default/animated-mobile-compass/AnimatedMobileCompass.vue", "type": "registry:component" }]
     },
