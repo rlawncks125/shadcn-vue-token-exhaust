@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<{
   duration?: number
   disabled?: boolean
 }>(), {
-  namePrefix: '', service: '', optionalServices: () => [], autoConnect: true, disconnectOnUnmount: true, title: 'Connect a device', description: 'Choose a nearby Bluetooth accessory and establish a secure local connection.', selectLabel: 'Choose device', duration: 280, disabled: false,
+  namePrefix: '', service: '', optionalServices: () => [], autoConnect: true, disconnectOnUnmount: true, title: 'Connect a device', description: 'Choose a nearby Bluetooth Low Energy device and establish a secure local connection.', selectLabel: 'Choose device', duration: 280, disabled: false,
 })
 const emit = defineEmits<{
   select: [device: AnimatedMobileBluetoothDeviceInfo]
