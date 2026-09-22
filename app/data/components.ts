@@ -50,6 +50,18 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-bluetooth-pairing', name: 'Animated Mobile Bluetooth Pairing', category: 'forms', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional Web Bluetooth control with device filtering, native picker, GATT connect and reconnect, disconnect events, and unsupported fallback.', tags: ['bluetooth', 'gatt', 'web-api'],
+    props: [
+      { name: 'namePrefix / service / optionalServices', type: 'string / string[]', default: '- / - / []', description: 'Native device picker filters and requested GATT services.' },
+      { name: 'autoConnect / disconnectOnUnmount', type: 'boolean', default: 'true / true', description: 'GATT connection and cleanup behavior.' },
+      { name: 'title / description / selectLabel', type: 'string', default: 'Pairing defaults', description: 'Visible context and action copy.' },
+      { name: 'duration / disabled', type: 'number / boolean', default: '280 / false', description: 'Status transition timing and interaction state.' },
+      { name: 'select / connecting / connected / disconnect / cancel / unsupported / error', type: 'events', default: '-', description: 'Reports the Bluetooth and GATT lifecycle.' },
+      { name: 'selectDevice / connect / disconnect / clear', type: 'exposed methods', default: '-', description: 'Programmatic picker and connection controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-native-share', name: 'Animated Mobile Native Share', category: 'feedback', status: 'Ready', updated: '2026.09.22',
     description: 'A functional Web Share API card with native share-sheet lifecycle, file capability checks, cancellation handling, and clipboard fallback.', tags: ['share', 'native', 'web-api'],
     props: [

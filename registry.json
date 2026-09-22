@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-bluetooth-pairing", "type": "registry:component", "title": "Animated Mobile Bluetooth Pairing",
+      "description": "A functional Web Bluetooth control with device filtering, native picker, GATT connect and reconnect, disconnect events, and unsupported fallback.",
+      "categories": ["forms", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-bluetooth-pairing/AnimatedMobileBluetoothPairing.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-native-share", "type": "registry:component", "title": "Animated Mobile Native Share",
       "description": "A functional Web Share API card with native share-sheet lifecycle, file capability checks, cancellation handling, and clipboard fallback.",
       "categories": ["feedback", "mobile", "web-api", "interactive"],

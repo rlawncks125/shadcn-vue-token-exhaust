@@ -1,4 +1,12 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-bluetooth-pairing': `<template>
+  <AnimatedMobileBluetoothPairing
+    name-prefix="FIELD-"
+    :optional-services="['battery_service']"
+    @connected="(device, server) => readSensor(device, server)"
+    @error="message => showBluetoothHelp(message)"
+  />
+</template>`,
   'animated-mobile-native-share': `<template>
   <AnimatedMobileNativeShare
     title="Tide pool conditions"

@@ -50,6 +50,7 @@ const AnimatedMobileWakeLock = defineAsyncComponent(() => import('#registry/defa
 const AnimatedMobileContactPicker = defineAsyncComponent(() => import('#registry/default/animated-mobile-contact-picker/AnimatedMobileContactPicker.vue'))
 const AnimatedMobileInstallPrompt = defineAsyncComponent(() => import('#registry/default/animated-mobile-install-prompt/AnimatedMobileInstallPrompt.vue'))
 const AnimatedMobileNativeShare = defineAsyncComponent(() => import('#registry/default/animated-mobile-native-share/AnimatedMobileNativeShare.vue'))
+const AnimatedMobileBluetoothPairing = defineAsyncComponent(() => import('#registry/default/animated-mobile-bluetooth-pairing/AnimatedMobileBluetoothPairing.vue'))
 
 defineProps<{ slug: string }>()
 
@@ -148,7 +149,8 @@ const lightboxImages: AnimatedLightboxImage[] = [
 
 <template>
   <div class="latest-component-preview w-full min-w-0">
-    <div v-if="slug === 'animated-mobile-native-share'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#b9cac3] p-4"><AnimatedMobileNativeShare title="Tide pool conditions" text="Low tide revealed a dense field of anemones." url="https://example.com/notes/42" :duration="180" /></div>
+    <div v-if="slug === 'animated-mobile-bluetooth-pairing'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#aebfb8] p-4"><AnimatedMobileBluetoothPairing name-prefix="FIELD-" :duration="180" /></div>
+    <div v-else-if="slug === 'animated-mobile-native-share'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#b9cac3] p-4"><AnimatedMobileNativeShare title="Tide pool conditions" text="Low tide revealed a dense field of anemones." url="https://example.com/notes/42" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-install-prompt'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#c7bfaf] p-4"><AnimatedMobileInstallPrompt v-model="installPromptOpen" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-contact-picker'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#d7cbbd] p-4"><AnimatedMobileContactPicker v-model="latestContacts" :duration="180" /></div>
     <div v-else-if="slug === 'animated-mobile-wake-lock'" class="mx-auto flex min-h-[300px] w-full max-w-[390px] items-center rounded-[22px] bg-[#c7d0c4] p-4"><AnimatedMobileWakeLock v-model="wakeLockEnabled" :duration="180" /></div>
