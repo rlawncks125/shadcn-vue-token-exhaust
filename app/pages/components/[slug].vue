@@ -454,6 +454,12 @@ const tourDuration = ref(280)
 const tourCloseOnBackdrop = ref(true)
 const tourLockScroll = ref(true)
 const tourDisabled = ref(false)
+const readAloudRate = ref(1)
+const readAloudPitch = ref(1)
+const readAloudVolume = ref(1)
+const readAloudShowVoices = ref(true)
+const readAloudDuration = ref(220)
+const readAloudDisabled = ref(false)
 const locationHighAccuracy = ref(true)
 const locationTimeout = ref(10000)
 const locationMaximumAge = ref(0)
@@ -625,6 +631,12 @@ async function copyExample() {
 }
 
 function resetControls() {
+  readAloudRate.value = 1
+  readAloudPitch.value = 1
+  readAloudVolume.value = 1
+  readAloudShowVoices.value = true
+  readAloudDuration.value = 220
+  readAloudDisabled.value = false
   locationHighAccuracy.value = true
   locationTimeout.value = 10000
   locationMaximumAge.value = 0
@@ -1268,7 +1280,8 @@ useHead(() => ({
         </div>
 
         <div v-if="activeTab === 'preview'" class="grid min-h-[500px] place-items-center overflow-hidden bg-canvas p-7 transition-colors duration-300 sm:min-h-[600px] sm:p-12 motion-reduce:transition-none">
-            <LazyPreviewsAnimatedMobileLocationCheckInPreview v-if="item.slug === 'animated-mobile-location-check-in'" :high-accuracy="locationHighAccuracy" :timeout="locationTimeout" :maximum-age="locationMaximumAge" :auto-request="locationAutoRequest" :duration="locationDuration" :disabled="locationDisabled" />
+            <LazyPreviewsAnimatedMobileReadAloudPreview v-if="item.slug === 'animated-mobile-read-aloud'" :rate="readAloudRate" :pitch="readAloudPitch" :volume="readAloudVolume" :show-voice-picker="readAloudShowVoices" :duration="readAloudDuration" :disabled="readAloudDisabled" />
+            <LazyPreviewsAnimatedMobileLocationCheckInPreview v-else-if="item.slug === 'animated-mobile-location-check-in'" :high-accuracy="locationHighAccuracy" :timeout="locationTimeout" :maximum-age="locationMaximumAge" :auto-request="locationAutoRequest" :duration="locationDuration" :disabled="locationDisabled" />
             <LazyPreviewsAnimatedMobileFileExportPreview v-else-if="item.slug === 'animated-mobile-file-export'" :fallback-download="fileExportFallback" :duration="fileExportDuration" :disabled="fileExportDisabled" />
             <LazyPreviewsAnimatedMobileBluetoothPairingPreview v-else-if="item.slug === 'animated-mobile-bluetooth-pairing'" :name-prefix="bluetoothNamePrefix" :service="bluetoothService" :auto-connect="bluetoothAutoConnect" :disconnect-on-unmount="bluetoothDisconnectOnUnmount" :duration="bluetoothDuration" :disabled="bluetoothDisabled" />
             <LazyPreviewsAnimatedMobileNativeSharePreview v-else-if="item.slug === 'animated-mobile-native-share'" :fallback="nativeShareFallback" :duration="nativeShareDuration" :disabled="nativeShareDisabled" />
@@ -1439,6 +1452,14 @@ useHead(() => ({
         </div>
 
           <div class="space-y-5">
+            <div v-if="item.slug === 'animated-mobile-read-aloud'" class="space-y-5">
+              <label class="block text-xs">Rate · {{ readAloudRate.toFixed(1) }}×<input v-model.number="readAloudRate" type="range" min="0.5" max="2" step="0.1" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Pitch · {{ readAloudPitch.toFixed(1) }}<input v-model.number="readAloudPitch" type="range" min="0" max="2" step="0.1" class="mt-3 w-full accent-black"></label>
+              <label class="block text-xs">Volume · {{ Math.round(readAloudVolume * 100) }}%<input v-model.number="readAloudVolume" type="range" min="0" max="1" step="0.1" class="mt-3 w-full accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Voice picker <input v-model="readAloudShowVoices" type="checkbox" class="accent-black"></label>
+              <label class="flex items-center justify-between text-xs">Disabled <input v-model="readAloudDisabled" type="checkbox" class="accent-black"></label>
+              <p class="text-xs leading-5 text-black/45">Voices come from the current operating system and may load asynchronously. Playback starts only from a user action.</p>
+            </div>
             <div v-if="item.slug === 'animated-mobile-location-check-in'" class="space-y-5">
               <label class="flex items-center justify-between text-xs">High accuracy <input v-model="locationHighAccuracy" type="checkbox" class="accent-black"></label>
               <label class="block text-xs">Timeout · {{ locationTimeout }}ms<input v-model.number="locationTimeout" type="range" min="1000" max="30000" step="1000" class="mt-3 w-full accent-black"></label>

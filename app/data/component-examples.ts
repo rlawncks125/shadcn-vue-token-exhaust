@@ -1,4 +1,12 @@
 export const componentExamples: Record<string, string> = {
+  'animated-mobile-read-aloud': `<template>
+  <AnimatedMobileReadAloud
+    :text="article.summary"
+    language="en-US"
+    :rate="0.95"
+    @end="markAsListened()"
+  />
+</template>`,
   'animated-mobile-location-check-in': `<template>
   <AnimatedMobileLocationCheckIn
     :high-accuracy="true"

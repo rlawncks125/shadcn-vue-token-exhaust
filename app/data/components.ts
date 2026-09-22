@@ -50,6 +50,17 @@ export const categories = [
 
 export const registryComponents: RegistryComponent[] = [
   {
+    slug: 'animated-mobile-read-aloud', name: 'Animated Mobile Read Aloud', category: 'feedback', status: 'Ready', updated: '2026.09.22',
+    description: 'A functional SpeechSynthesis reader with device voices, rate and pitch controls, pause and resume, boundary progress, and cleanup.', tags: ['speech', 'accessibility', 'web-api'],
+    props: [
+      { name: 'text / language / voiceName', type: 'string', default: 'required / en-US / auto', description: 'Spoken content, locale, and preferred device voice.' },
+      { name: 'rate / pitch / volume', type: 'number', default: '1 / 1 / 1', description: 'SpeechSynthesisUtterance playback values.' },
+      { name: 'showVoicePicker / stopOnUnmount', type: 'boolean', default: 'true / true', description: 'Voice selection and cleanup behavior.' },
+      { name: 'start / pause / resume / stop / end / boundary / error', type: 'events', default: '-', description: 'Reports the complete speech lifecycle.' },
+      { name: 'speak / pause / resume / stop / toggle', type: 'exposed methods', default: '-', description: 'Programmatic speech controls.' },
+    ],
+  },
+  {
     slug: 'animated-mobile-location-check-in', name: 'Animated Mobile Location Check-In', category: 'forms', status: 'Ready', updated: '2026.09.22',
     description: 'A functional Geolocation API check-in with high-accuracy options, timeout and permission errors, coordinate feedback, refresh, and confirmation.', tags: ['geolocation', 'check-in', 'web-api'],
     props: [

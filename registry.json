@@ -38,6 +38,12 @@
       ]
     },
     {
+      "name": "animated-mobile-read-aloud", "type": "registry:component", "title": "Animated Mobile Read Aloud",
+      "description": "A functional SpeechSynthesis reader with device voices, rate and pitch controls, pause and resume, boundary progress, and cleanup.",
+      "categories": ["feedback", "mobile", "web-api", "interactive"],
+      "files": [{ "path": "registry/default/animated-mobile-read-aloud/AnimatedMobileReadAloud.vue", "type": "registry:component" }]
+    },
+    {
       "name": "animated-mobile-location-check-in", "type": "registry:component", "title": "Animated Mobile Location Check-In",
       "description": "A functional Geolocation API check-in with high-accuracy options, timeout and permission errors, coordinate feedback, refresh, and confirmation.",
       "categories": ["forms", "mobile", "web-api", "interactive"],
